@@ -1,5 +1,9 @@
 <?php
+
 /* noooobs nn */
+
+
+/*Master*/
 /**
  * Created by PhpStorm.
  * User: andrus.jakobson
@@ -119,7 +123,6 @@ if (isset($btn) && $btn == 'register') {
 }
 
 get_template('head'); ?>
-
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
