@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="eb1fb563-00ba-4e33-9dd6-8870a312db77" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.php" afterPath="$PROJECT_DIR$/public/index.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -191,7 +190,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1504694972617</updated>
-      <workItem from="1504694973924" duration="1432000" />
+      <workItem from="1504694973924" duration="1517000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'master' into henri&#10;&#10;# Conflicts:&#10;#&#9;index.html">
       <created>1504695311393</created>
@@ -242,11 +241,18 @@
       <option name="project" value="LOCAL" />
       <updated>1504696373147</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Merge branch 'master' into henri&#10;&#10;# Conflicts:&#10;#&#9;public/index.php">
+      <created>1504696418269</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1504696418269</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1432000" />
+    <option name="totallyTimeSpent" value="1517000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
