@@ -50,7 +50,7 @@ if (isset($btn) && $btn == 'login') {
 }
 
 if (isset($btn) && $btn == 'register') {
-
+    echo "test";
     $errors = [];
     //kontroll kasutajanimele, et ei ole tühi
     $username = filter_input(INPUT_POST, 'username', FILTER_VALIDATE_EMAIL);
