@@ -1,6 +1,6 @@
 <?php
 
-/*Master*/ /*Andrus Lisas mind!*/
+/*Master*/ /*Tere*/
 
 /**
  * Created by PhpStorm.
