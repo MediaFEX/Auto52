@@ -119,7 +119,7 @@ if (isset($btn) && $btn == 'register') {
 }
 
 get_template('head'); ?>
-
+    <?php echo "Greetings"; ?>
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
