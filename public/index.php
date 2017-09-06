@@ -1,9 +1,7 @@
 <?php
 
-/* noooobs nn */
+/*Master*/ /*Andrus Lisas mind!*/
 
-
-/*Master*/
 /**
  * Created by PhpStorm.
  * User: andrus.jakobson
