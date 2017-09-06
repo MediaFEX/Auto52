@@ -1,4 +1,6 @@
 <?php
+
+/*Master*/
 /**
  * Created by PhpStorm.
  * User: andrus.jakobson
