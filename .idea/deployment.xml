@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="TAK15_Jakobson">
+  <component name="PublishConfigData" serverName="Henri_Rannala">
     <serverData>
-      <paths name="TAK15_Jakobson">
+      <paths name="Henri_Rannala">
         <serverdata>
           <mappings>
-            <mapping deploy="/public_html/Auto48" local="$PROJECT_DIR$" web="TAK15_Jakobson/Auto48" />
+            <mapping deploy="/public_html/auto52" local="$PROJECT_DIR$" web="auto52" />
           </mappings>
         </serverdata>
       </paths>
