@@ -80,4 +80,17 @@ class User extends DatabaseQuery
 
         return false;
     }
+    public static function findAll($start, $max)
+    {
+        global $database;
+
+        $sql = "SELECT * FROM "
+            . PX . self::$table_name . " LIMIT " . $database->escape_value($start) . ", " . $database->escape_value($max);
+
+        echo $sql;
+
+        $result = self::find_by_query($sql);
+
+        return !empty($result) ? $result : false;
+    }
 }

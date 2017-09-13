@@ -22,9 +22,9 @@ if(empty($pageNr)) {
 
 $product = Product::findAll($pageNrInDb, MAX_CATEGORIES);
 
-$countProducts = Product::count_all();
+$countCategories = Product::count_all();
 
-$pagesCount = ceil( 8 / MAX_CATEGORIES);
+$pagesCount = ceil( $countCategories / MAX_CATEGORIES);
 ?>
     <div class="row">
         <div class="col-sm-4">
@@ -50,7 +50,7 @@ if (!empty($product)) : ?>
     <table class="table">
         <thead>
         <tr>
-            <th>ID Yes</th>
+            <th>ID</th>
             <th>Nimi</th>
             <th>Lisatud</th>
             <th>Vanem</th>

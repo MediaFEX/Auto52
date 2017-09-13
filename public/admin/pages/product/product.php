@@ -85,9 +85,9 @@ if(isset($btn)) {
 
             $product_id = empty($ID) ? $database->get_last_ID() : $ID;
 
-            unset($names['et']);
-            unset($prices['et']);
-            unset($descriptions['et']);
+            //unset($names['et']);
+            //unset($prices['et']);
+            //unset($descriptions['et']);
 
             foreach ($names as $lang => $name) {
                 $pLang = ProductLanguage::findByColumnLangProduct('name', $lang, $product_id);

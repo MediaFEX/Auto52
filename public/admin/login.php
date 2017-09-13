@@ -9,7 +9,7 @@
 require_once "../../include/start.php"; 
 
 if($session->is_logged_in() && User::checkRights($session->user_id, 'index.php')) { 
-    //reDirectTo('index.php');
+    reDirectTo('index.php');
 } 
 
 $btn = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING); 
@@ -21,7 +21,7 @@ if (isset($btn) && $btn == 'login') {
     $username = filter_input(INPUT_POST, 'username', FILTER_VALIDATE_EMAIL); 
     if(empty($username)) { 
         $errors['username'] = "Kasutajanimi ei tohi olla tühi!"; 
-    } 
+    }
 
     //kontroll paroolile, et ei ole tühi 
     $pass = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING); 
@@ -83,13 +83,13 @@ if (isset($btn) && $btn == 'register') {
         $user->lang = 'et'; 
         $user->rights = 'user'; 
         $user->added = date("Y-m-d H:i:s"); 
-        $user->status = 0; 
+        $user->status = 1;
 
         if($user->save()) { 
 
-            //3. loome objecti ConfirmEmail 
-            ////4. sisestame andmed objekti 
-            $eConfirm = new EmailConfirm(); 
+            //3. loome objecti ConfirmEmail
+            ////4. sisestame andmed objekti
+            $eConfirm = new EmailConfirm();
             $eConfirm->user_id = $database->get_last_ID(); 
             //1. vaja genereerida suvaline hash (a-A0-9) 
             //2. kontroll ega ei ole baasis sellist hashi 

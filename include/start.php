@@ -88,7 +88,7 @@ if(file_exists($langFile)) {
     require_once INCLUDE_PATH . "languages" . DS . DEFAULT_LANG . '.php'; 
 } 
 
-$languagesInPage = ['en', 'fi', 'de']; 
+$languagesInPage = ['en'];
 
 //Added constants 
 defined('MAX_PASS_LENGTH') ? null : define('MAX_PASS_LENGTH', 3); 
