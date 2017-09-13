@@ -50,7 +50,7 @@ if (!empty($product)) : ?>
     <table class="table">
         <thead>
         <tr>
-            <th>ID</th>
+            <th>ID Yes</th>
             <th>Nimi</th>
             <th>Lisatud</th>
             <th>Vanem</th>
