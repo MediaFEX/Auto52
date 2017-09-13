@@ -5,7 +5,7 @@
  * Date: 10.05.2016 
  * Time: 9:10 
  */
-require_once "../include/start.php";
+require_once "../../include/start.php";
 
 $page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_STRING);
 

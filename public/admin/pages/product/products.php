@@ -65,8 +65,25 @@ if (!empty($product)) : ?>
                 <td><?php echo $cat->name?></td>
                 <td><?php echo $cat->added?></td>
                 <td>
-                    <?php $category_name = Category::find_by_ID($cat->category_id); ?>
-                    <?php echo empty($category_name)?'Põhikategooria':$category_name->name;?>
+                    <?php
+
+                        $category_name = Category::find_by_ID2($cat->category_id);
+                        #echo $cat->category_id;
+                        $id_name=explode(',', $cat->category_id);
+                        #echo "<pre>";
+                        #print_r(Category::find_by_ID2($cat->category_id));
+                        #print_r($category_name);
+                        #echo "</pre>";
+                        #echo empty($id_name)?'Põhikategooria':$category_name->name;
+
+                        foreach ($id_name as $key => $value) {
+                            if($key!=0){
+                                echo ", ";
+                            }
+                            echo empty($id_name)?'Põhikategooria':$category_name[$key]->name;
+                        }
+                        
+                    ?>
                 </td>
                 <td>
                     <a href="<?php echo ADMIN_URL . "?page=product&ID=" . $cat->ID; ?>">
@@ -74,7 +91,7 @@ if (!empty($product)) : ?>
                     </a>
                 </td>
                 <td>
-                    <a href="<?php echo ADMIN_URL . "?page=delete&ID=" . $cat->ID; ?>">
+                    <a href="<?php echo ADMIN_URL . "?page/delete-product&ID=" . $cat->ID; ?>">
                         <span class="glyphicon glyphicon-trash"></span>
                     </a>
                 </td>

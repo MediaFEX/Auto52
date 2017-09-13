@@ -22,18 +22,18 @@ function better_crypt($input, $rounds = 10) {
 
 function pd($data) {
     if(empty($data)) { 
-        //echo "Data missing!";
+        echo "Data missing!";
         return true;
     } 
 
-    /*if(is_array($data) || is_object($data)) {
+    if(is_array($data) || is_object($data)) {
         echo '<pre>'; 
         print_r($data); 
         echo '</pre>'; 
         return; 
     } 
 
-    echo $data; */
+    echo $data;
 } 
 
 function reDirectTo($url) { 

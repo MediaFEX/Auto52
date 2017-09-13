@@ -1,14 +1,11 @@
 <?php
-
-/*Master*/ /*Tere*/
-
 /**
  * Created by PhpStorm.
  * User: andrus.jakobson
  * Date: 21.02.2017
  * Time: 8:47
  */
-
+/*bamboozled again*/
 require_once "../include/start.php";
 
 if($session->is_logged_in() && User::checkRights($session->user_id, 'index.php')) {
@@ -53,6 +50,7 @@ if (isset($btn) && $btn == 'login') {
 }
 
 if (isset($btn) && $btn == 'register') {
+
     $errors = [];
     //kontroll kasutajanimele, et ei ole tühi
     $username = filter_input(INPUT_POST, 'username', FILTER_VALIDATE_EMAIL);
@@ -121,6 +119,7 @@ if (isset($btn) && $btn == 'register') {
 }
 
 get_template('head'); ?>
+
     <div class="container">
         <div class="row">
             <div class="col-lg-12">

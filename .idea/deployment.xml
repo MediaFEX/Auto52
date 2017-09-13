@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="On explicit save action">
+  <component name="PublishConfigData" serverName="TAK15_Jakobson">
     <serverData>
-      <paths name="ubuntu ametikool">
+      <paths name="TAK15_Jakobson">
         <serverdata>
           <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/public_html/Auto48" local="$PROJECT_DIR$" web="TAK15_Jakobson/Auto48" />
           </mappings>
         </serverdata>
       </paths>
     </serverData>
-    <option name="myAutoUpload" value="ON_EXPLICIT_SAVE" />
   </component>
 </project>

@@ -44,7 +44,7 @@ $pagesCount = ceil( 8 / MAX_CATEGORIES);
             <th>Lisatud</th> 
             <th>Vanem</th> 
             <th>Muuda</th> 
-            <th>Kustuta</th> 
+            <th>Kustuta</th>
         </tr> 
         </thead> 
         <tbody> 

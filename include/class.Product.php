@@ -5,7 +5,7 @@
  * Date: 9.03.2017
  * Time: 14:07
  */
-class Product extends DatabaseQuery 
+class Product extends DatabaseQuery
 { 
     public static $table_name = 'products'; 
     public static $db_fields = [ 
@@ -32,7 +32,8 @@ class Product extends DatabaseQuery
     public $edited_by; 
     public $status; 
 
-    public static function find_by_name($s = "") { 
+    public static function 
+    name($s = "") { 
         global $database; 
 
         if(empty($s)) { 

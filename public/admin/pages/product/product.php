@@ -29,18 +29,18 @@ if(isset($btn)) {
     $names = filterArray($_POST['name'], FILTER_SANITIZE_STRING);
     $prices = filterArray($_POST['price'], FILTER_VALIDATE_FLOAT);
     $descriptions = filterArray($_POST['description'], FILTER_SANITIZE_STRING);
-    $parents = filterArray($_POST['parent'], FILTER_VALIDATE_INT);
+    $parent = filterArray($_POST['parent'], FILTER_SANITIZE_STRING);
 
 //    unset($names['et']);
 //    unset($prices['et']);
 //    unset($descriptions['et']);
 
-//    pd($names);
-//    pd($prices);
-//    pd($descriptions);
-//    pd($parents);
+    pd($names);
+    pd($prices);
+    pd($descriptions);
+    pd($parent);
 
-    //exit();
+//    exit();
 
     if(empty($names['et'])) {
         $errors['name'] = "Nimi ei tohi olla tühi";
@@ -65,7 +65,17 @@ if(isset($btn)) {
         $product->name = $names['et'];
         $product->price = $prices['et'];
         $product->added = date("Y-m-d H:i:s");
+
+        foreach ($parent as $key => $value) {
+            if($parent[$key]==0){
+                unset($parent[$key]);
+            }
+        }
+        $parent=implode(',', $parent);
+
+        echo '<pre>'.$parent.'</pre>';
         $product->category_id = $parent;
+
         $product->status = $status == 'on' ? 1 : 0;
         $product->added_by = $_SESSION['user_id'];
         $product->edited_by = $_SESSION['user_id'];
