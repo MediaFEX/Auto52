@@ -40,7 +40,17 @@ class DatabaseQuery
 
         return !empty($result) ? array_shift($result) : false;
     }
+    public static function find_by_ID2($ID = 0) {
+        global $database;
 
+        $sql = "SELECT * FROM "
+            . PX . static::$table_name
+            . " WHERE ID IN(" . $database->escape_value($ID) . ")";
+
+        $result = static::find_by_query($sql);
+
+        return !empty($result) ? $result : false;
+    }
     public static function find_by_query($query = '') {
         global $database;
 

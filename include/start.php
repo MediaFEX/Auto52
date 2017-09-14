@@ -18,9 +18,10 @@ defined('PX') ? NULL : define('PX', 'TACOLA_');
 
 /*
  * CHANGE TWO LINES 20 AND 21-22 
- * */ 
-defined('ROOT_URL') ? null : define('ROOT_URL', 'http://ubuntu.ametikool.ee/~TAK15_Jakobson/Auto48/');
-defined('ROOT_PATH') ? null : define('ROOT_PATH', DS . 'home'.DS.'TAK15_Jakobson'.DS.'public_html'.DS.'Auto48'.DS);
+ * */
+$currentSite='Auto52';
+defined('ROOT_URL') ? null : define('ROOT_URL', 'http://ubuntu.ametikool.ee/~TAK15_Jakobson/'.$currentSite.'/');
+defined('ROOT_PATH') ? null : define('ROOT_PATH', DS . 'home'.DS.'TAK15_Jakobson'.DS.'public_html'.DS.$currentSite.DS);
 
 //MAIN CONSTANTS 
 defined('INCLUDE_PATH') ? null : define('INCLUDE_PATH', ROOT_PATH . 'include' . DS); 
@@ -88,7 +89,7 @@ if(file_exists($langFile)) {
     require_once INCLUDE_PATH . "languages" . DS . DEFAULT_LANG . '.php'; 
 } 
 
-$languagesInPage = ['en', 'fi', 'de']; 
+$languagesInPage = ['en'];
 
 //Added constants 
 defined('MAX_PASS_LENGTH') ? null : define('MAX_PASS_LENGTH', 3); 

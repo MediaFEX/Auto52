@@ -24,7 +24,7 @@ $categories = Category::findAll($pageNrInDb, MAX_CATEGORIES);
 
 $countCategories = Category::count_all(); 
 
-$pagesCount = ceil( 8 / MAX_CATEGORIES); 
+$pagesCount = ceil( $countCategories / MAX_CATEGORIES);
 
 
 ?> 
@@ -44,7 +44,7 @@ $pagesCount = ceil( 8 / MAX_CATEGORIES);
             <th>Lisatud</th> 
             <th>Vanem</th> 
             <th>Muuda</th> 
-            <th>Kustuta</th> 
+            <th>Kustuta</th>
         </tr> 
         </thead> 
         <tbody> 
@@ -79,7 +79,7 @@ $pagesCount = ceil( 8 / MAX_CATEGORIES);
                 <li><a href="<?php echo ADMIN_URL . "?page=categories&pageNr=" . $previous; ?>"><?php echo translate("previous_btn") ?></a></li> 
             <?php endif; ?> 
         <?php endif; ?> 
-        <?php if($pagesCount-1 > $pageNr ) : ?> 
+        <?php if($pagesCount-1 > $pageNr ) : ?>
             <li><a href="<?php echo ADMIN_URL . "?page=categories&pageNr=" . $next; ?>"><?php echo translate("next_btn") ?></a></li> 
         <?php endif; ?> 
     </ul> 

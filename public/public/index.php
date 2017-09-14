@@ -5,7 +5,7 @@
  * Date: 10.05.2016 
  * Time: 9:10 
  */
-require_once "../include/start.php";
+require_once "../../include/start.php";
 
 $page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_STRING);
 
@@ -41,7 +41,8 @@ get_template('head'); ?>
         </div>
         <div class="row">
             <!------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-            <nav class="navbar navbar-inverse sidebar" role="navigation">
+            <nav class="navbar navbar-inverse navbar-toggleable-md" role="navigation">
+            <!--    <nav class="navbar navbar-toggleable-md navbar-light bg-faded"> --->
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
@@ -51,7 +52,7 @@ get_template('head'); ?>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">Brand</a>
+                        <a class="navbar-brand" href="#">Auto 48</a>
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
@@ -94,6 +95,7 @@ get_template('head'); ?>
             <!--<div class="main">
             </div>  -->
             <!------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <table style="width:100%">
             <div class="col-sm-3">
                 <form method="post" action="<?php echo MAIN_URL; ?>">
                     <?php if(!empty($categories[0])) : foreach ($categories[0] as $category) : ?>

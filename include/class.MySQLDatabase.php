@@ -58,13 +58,24 @@ class MySQLDatabase
             die($r);
         }
     }
+    
 
     public function fetch_array($result) {
         return $result->fetch_array(MYSQLI_ASSOC);
     }
 
     public function escape_value($value) {
-        return stripslashes($value);
+        if(is_array($value)){
+            foreach($value as &$val){
+                if(is_array($val)){
+                    $val = unstrip_array($val);
+                }else{
+                    $val = stripslashes($val);
+                }
+            }
+        }
+        
+        return $value;
     }
 
     public function check_last_query() {

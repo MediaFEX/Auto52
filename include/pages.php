@@ -6,7 +6,18 @@
  * Time: 13:20
  */
 
-$pages = [ 
+$pages = [
+    //User page
+    'user' => [
+        'name' => 'Kasutajad',
+        'url' => 'page/user',
+        'path' => 'user/user.php'
+    ],
+    'users' => [
+        'name' => 'Kasutaja',
+        'url' => 'page/users',
+        'path' => 'user/users.php'
+    ],
     //ADMIN START PAGES 
     'categories' => [ 
         'name' => 'Kategooriad', 
