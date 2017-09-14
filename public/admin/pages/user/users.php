@@ -25,6 +25,7 @@ $status = filter_input(INPUT_POST, 'status', FILTER_VALIDATE_INT);
 $email = filter_input(INPUT_POST, 'name', FILTER_VALIDATE_EMAIL);
 $pass = filter_input(INPUT_POST, 'pass', FILTER_SANITIZE_STRING);
 $rights = filter_input(INPUT_POST, 'rights', FILTER_SANITIZE_STRING);
+$lang = filter_input(INPUT_POST, 'lang', FILTER_SANITIZE_STRING);
 
 if(isset($btn)) {
     $errors = [];
@@ -50,6 +51,7 @@ if(isset($btn)) {
         }
         $category->status = $status;
         $category->rights = $rights;
+        $category->lang = $lang;
 
         if($category->save()) {
             if(empty($ID)) {
@@ -90,7 +92,11 @@ if(isset($btn)) {
       <option <?php if(isset($category->rights)&&$category->rights=='moderator'){echo "selected";} ?> value="moderator">Moderator</option>
       <option <?php if(isset($category->rights)&&$category->rights=='admin'){echo "selected";} ?> value="admin">Admin</option>
     </select>
-
+    <label for="status">Language</label>
+    <select name="lang" class="form-control">
+      <option <?php if(isset($category->lang)&&$category->lang=='et'){echo "selected";} ?> value="et">et</option>
+      <option <?php if(isset($category->lang)&&$category->lang=='en'){echo "selected";} ?> value="en">en</option>
+    </select>
 
     <button type="submit" value="add" name="action" class="btn btn-default">Loo</button>
 </form>
