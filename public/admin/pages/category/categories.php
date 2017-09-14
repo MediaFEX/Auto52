@@ -15,23 +15,24 @@ $next = $pageNr+1;
 $previous = $pageNr-1; 
 
 if(empty($pageNr)) { 
-    $pageNrInDb = 0; 
-} else { 
-    $pageNrInDb = $pageNr * MAX_CATEGORIES; 
+    $pageNrInDb = 0;
+} else {
+    $pageNrInDb = $pageNr * MAX_CATEGORIES;
 } 
 
-$categories = Category::findAll($pageNrInDb, MAX_CATEGORIES); 
+$categories = Category::findAll($pageNrInDb, MAX_CATEGORIES);
 
-$countCategories = Category::count_all(); 
+$countCategories = Category::count_all();
 
 $pagesCount = ceil( $countCategories / MAX_CATEGORIES);
 
 
 ?> 
-<h3 class="page-header"> 
-    <a href="<?php echo ADMIN_URL . "?page=category"; ?>"><small class="text-left"><span class="glyphicon glyphicon-plus-sign"></span> Lisa</small></a> 
-    <span class="pull-right"><?php echo $pages[$page]['name'] ?></span> 
-</h3> 
+    <div class="row">
+        <div class="col-sm-4">
+            <h3><a href="<?php echo ADMIN_URL . "?page=category"; ?>"><span class="glyphicon glyphicon-plus-sign"></span> Lisa</a></h3>
+        </div>
+    </div>
 
 <?php // echo isset($session->message) ? $session->message : '' ?> 
 
@@ -60,12 +61,12 @@ $pagesCount = ceil( $countCategories / MAX_CATEGORIES);
                 <td> 
                     <a href="<?php echo ADMIN_URL . "?page=category&ID=" . $cat->ID; ?>"> 
                         <span class="glyphicon glyphicon-pencil"></span> 
-                    </a> 
-                </td> 
-                <td> 
-                    <a href="<?php echo ADMIN_URL . "?page=delete&ID=" . $cat->ID; ?>"> 
-                        <span class="glyphicon glyphicon-trash"></span> 
-                    </a> 
+                    </a>
+                </td>
+                <td>
+                    <a href="<?php echo ADMIN_URL . "?page=delete&ID=" . $cat->ID; ?>">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
                 </td> 
             </tr> 
         <?php endforeach; ?> 

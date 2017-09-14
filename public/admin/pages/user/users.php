@@ -24,7 +24,7 @@ $btn = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING);
 $status = filter_input(INPUT_POST, 'status', FILTER_VALIDATE_INT);
 $email = filter_input(INPUT_POST, 'name', FILTER_VALIDATE_EMAIL);
 $pass = filter_input(INPUT_POST, 'pass', FILTER_SANITIZE_STRING);
-//$status = filter_input(INPUT_POST, 'status', FILTER_SANITIZE_STRING);
+$rights = filter_input(INPUT_POST, 'rights', FILTER_SANITIZE_STRING);
 
 if(isset($btn)) {
     $errors = [];
@@ -44,11 +44,12 @@ if(isset($btn)) {
 
         $category->username = $email;
         if(isset($newAcc)){$category->added = date("Y-m-d H:i:s");}
-        if(i)
-        $passCrypt = better_crypt($pass);
-        $category->password = $passCrypt;
+        if(!strlen($pass)==0){
+        	$passCrypt = better_crypt($pass);
+        	$category->password = $passCrypt;
+        }
         $category->status = $status;
-        //$category->status = $status == 'on' ? 1 : 0;
+        $category->rights = $rights;
 
         if($category->save()) {
             if(empty($ID)) {
@@ -72,19 +73,24 @@ if(isset($btn)) {
 <form method="post">
     <div class="form-group">
         <label for="name">Email</label>
-        <input value="<?php echo isset($category->username) ? $category->username : ''; ?>" name="name" type="text" class="form-control" id="name" placeholder="Lisage parool">
+        <input value="<?php echo isset($category->username) ? $category->username : ''; ?>" name="name" type="text" class="form-control" id="name" placeholder="Lisa email">
     </div>
     <div class="form-group">
         <label for="name">Password</label>
-        <input value="<?php echo isset($category->password) ? $category->password : ''; ?>" name="pass" type="text" class="form-control" id="pass" placeholder="Lisage parool">
+        <input name="pass" type="text" class="form-control" id="pass" placeholder="Muuda parool">
     </div>
     <label for="status">Status</label>
     <select name="status" class="form-control">
       <option <?php if(isset($category->status)&&$category->status==0){echo "selected";} ?> value="0">0</option>
       <option <?php if(isset($category->status)&&$category->status==1){echo "selected";} ?> value="1">1</option>
-      <option <?php if(isset($category->status)&&$category->status==2){echo "selected";} ?> value="2">2</option>
-      <option <?php if(isset($category->status)&&$category->status==3){echo "selected";} ?> value="3">3</option>
     </select>
+    <label for="status">Rights</label>
+    <select name="rights" class="form-control">
+      <option <?php if(isset($category->rights)&&$category->rights=='user'){echo "selected";} ?> value="user">User</option>
+      <option <?php if(isset($category->rights)&&$category->rights=='moderator'){echo "selected";} ?> value="moderator">Moderator</option>
+      <option <?php if(isset($category->rights)&&$category->rights=='admin'){echo "selected";} ?> value="admin">Admin</option>
+    </select>
+
 
     <button type="submit" value="add" name="action" class="btn btn-default">Loo</button>
 </form>

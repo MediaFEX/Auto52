@@ -35,10 +35,10 @@ if(isset($btn)) {
 //    unset($prices['et']);
 //    unset($descriptions['et']);
 
-    pd($names);
-    pd($prices);
-    pd($descriptions);
-    pd($parent);
+//    pd($names);
+//    pd($prices);
+//    pd($descriptions);
+//    pd($parent);
 
 //    exit();
 

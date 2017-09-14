@@ -91,7 +91,7 @@ if (!empty($product)) : ?>
                     </a>
                 </td>
                 <td>
-                    <a href="<?php echo ADMIN_URL . "?page/delete-product&ID=" . $cat->ID; ?>">
+                    <a href="<?php echo ADMIN_URL . "?page=delete-product&ID=" . $cat->ID; ?>">
                         <span class="glyphicon glyphicon-trash"></span>
                     </a>
                 </td>

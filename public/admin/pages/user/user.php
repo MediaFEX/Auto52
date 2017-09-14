@@ -28,10 +28,11 @@ $pagesCount = ceil( $countCategories / MAX_CATEGORIES);
 
 
 ?>
-<h3 class="page-header"> 
-    <a href="<?php echo ADMIN_URL . "?page=users"; ?>"><small class="text-left"><span class="glyphicon glyphicon-plus-sign"></span> Lisa</small></a> 
-    <span class="pull-right"><?php echo $pages[$page]['name'] ?></span> 
-</h3> 
+    <div class="row">
+        <div class="col-sm-4">
+            <h3><a href="<?php echo ADMIN_URL . "?page=users"; ?>"><span class="glyphicon glyphicon-plus-sign"></span> Lisa</a></h3>
+        </div>
+    </div>
 <?php // echo isset($session->message) ? $session->message : '' ?>
 
 <?php if (!empty($categories)) : ?>
@@ -42,6 +43,7 @@ $pagesCount = ceil( $countCategories / MAX_CATEGORIES);
             <th>Nimi</th>
             <th>Lisatud</th>
             <th>Status</th>
+            <th>Rights</th>
             <th>Muuda</th>
             <th>Kustuta</th>
         </tr>
@@ -53,6 +55,7 @@ $pagesCount = ceil( $countCategories / MAX_CATEGORIES);
                 <td><?php echo $cat->username ?></td>
                 <td><?php echo $cat->added ?></td>
                 <td><?php echo $cat->status ?></td>
+                <td><?php echo $cat->rights ?></td>
                 <td>
                     <a href="<?php echo ADMIN_URL . "?page=users&ID=" . $cat->ID; ?>">
                         <span class="glyphicon glyphicon-pencil"></span>
