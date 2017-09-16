@@ -71,7 +71,7 @@ if(isset($btn)) {
     </div> 
     <div class="form-group"> 
         <label for="parent">Vanem</label> 
-        <?php $categories = Category::find_all(); ?> 
+        <?php $categories = Category::findAllWithNoParent(); ?> 
         <select name="parent" class="form-control chosen-select"> 
             <option value="0">Valige</option> 
             <?php if(!empty($categories)) : foreach ($categories as $cat) : ?> 

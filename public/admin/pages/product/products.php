@@ -54,6 +54,7 @@ if (!empty($product)) : ?>
             <th>Nimi</th>
             <th>Lisatud</th>
             <th>Vanem</th>
+            <th>Galerii</th>
             <th>Muuda</th>
             <th>Kustuta</th>
         </tr>
@@ -84,6 +85,11 @@ if (!empty($product)) : ?>
                         }
                         
                     ?>
+                </td>
+                <td>
+                    <a href="<?php echo ADMIN_URL . "?page=pictures&ID=" . $cat->ID; ?>">
+                        <span class="glyphicon glyphicon-picture"></span>
+                    </a>
                 </td>
                 <td>
                     <a href="<?php echo ADMIN_URL . "?page=product&ID=" . $cat->ID; ?>">

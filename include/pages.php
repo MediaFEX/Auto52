@@ -18,6 +18,11 @@ $pages = [
         'url' => 'page/users',
         'path' => 'user/users.php'
     ],
+    'delete-user' => [
+        'name' => 'Kustuta Kasutaja',
+        'url' => 'page/delete-user',
+        'path' => 'user/delete-user.php'
+    ],
     //ADMIN START PAGES
     'categories' => [
         'name' => 'Kategooriad',
@@ -60,12 +65,12 @@ $pages = [
     'home' => [
         'name' => 'Avaleht',
         'url' => 'page/home',
-        'path' => 'home.php'
+        'path' => 'home/home.php'
     ],
 
     'product-view' => [
         'name' => 'Toode',
         'url' => 'page/product-view',
-        'path' => 'product.php'
+        'path' => 'home/product.php'
     ],
 ];

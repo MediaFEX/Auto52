@@ -26,10 +26,10 @@ get_template('head'); ?>
         <div class="row">
             <div class="col-sm-3">
                 <ul class="nav nav-pills nav-stacked">
-                    <li role="presentation" <?php echo !isset($page) || $page == 'home' ? 'class="active"' : ''; ?>><a href="<?php echo ADMIN_URL; ?>">Home</a></li>
+                    <li role="presentation" <?php echo !isset($page) || $page == 'home' ? 'class="active"' : ''; ?>><a href="<?php echo ADMIN_URL; ?>?page=home">Home</a></li>
                     <li role="presentation" <?php echo in_array($page, ['user', 'users']) ? 'class="active"' : ''; ?>><a href="<?php echo ADMIN_URL; ?>?page=user">Kasutajad</a></li>
                     <li role="presentation" <?php echo in_array($page, ['categories', 'category', 'delete']) ? 'class="active"' : ''; ?>><a href="<?php echo ADMIN_URL; ?>?page=categories">Kategooriad</a></li>
-                    <li role="presentation" <?php echo in_array($page, ['products', 'product']) ? 'class="active"' : ''; ?>><a href="<?php echo ADMIN_URL; ?>?page=products">Tooted</a></li>
+                    <li role="presentation" <?php echo in_array($page, ['products', 'product', 'pictures']) ? 'class="active"' : ''; ?>><a href="<?php echo ADMIN_URL; ?>?page=products">Tooted</a></li>
                 </ul>
             </div>
             <div class="col-sm-9">

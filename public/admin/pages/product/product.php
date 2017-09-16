@@ -31,17 +31,6 @@ if(isset($btn)) {
     $descriptions = filterArray($_POST['description'], FILTER_SANITIZE_STRING);
     $parent = filterArray($_POST['parent'], FILTER_SANITIZE_STRING);
 
-//    unset($names['et']);
-//    unset($prices['et']);
-//    unset($descriptions['et']);
-
-//    pd($names);
-//    pd($prices);
-//    pd($descriptions);
-//    pd($parent);
-
-//    exit();
-
     if(empty($names['et'])) {
         $errors['name'] = "Nimi ei tohi olla tühi";
     } elseif (strlen($names['et']) > 100) {
@@ -84,10 +73,6 @@ if(isset($btn)) {
         if($product->save()) {
 
             $product_id = empty($ID) ? $database->get_last_ID() : $ID;
-
-            //unset($names['et']);
-            //unset($prices['et']);
-            //unset($descriptions['et']);
 
             foreach ($names as $lang => $name) {
                 $pLang = ProductLanguage::findByColumnLangProduct('name', $lang, $product_id);

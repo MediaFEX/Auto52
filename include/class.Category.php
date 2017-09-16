@@ -45,5 +45,13 @@ class Category extends DatabaseQuery
         $result = self::find_by_query($sql); 
 
         return !empty($result) ? $result : false; 
-    } 
+    }
+    public static function findAllWithNoParent(){ 
+        $sql = "SELECT * FROM "
+            . PX . static::$table_name . " WHERE parent=0 LIMIT 1000";
+
+        $result = static::find_by_query($sql);
+
+        return !empty($result) ? $result : false;
+    }
 }

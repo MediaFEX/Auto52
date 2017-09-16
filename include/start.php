@@ -10,6 +10,8 @@
 defined('DS') ? NULL : define('DS', DIRECTORY_SEPARATOR); 
 defined('PX') ? NULL : define('PX', 'TACOLA_'); 
 
+
+
 //DIRECTORY_SEPARATOR 
 //Windows \ 
 //Linux / 
@@ -94,3 +96,7 @@ $languagesInPage = ['en'];
 //Added constants 
 defined('MAX_PASS_LENGTH') ? null : define('MAX_PASS_LENGTH', 3); 
 defined('MAX_CATEGORIES') ? null : define('MAX_CATEGORIES', 5);
+
+if($_SERVER['REQUEST_URI']=='/~TAK15_Jakobson/Auto52/public/admin/index.php'||$_SERVER['REQUEST_URI']=='/~TAK15_Jakobson/Auto52/public/admin/'||$_SERVER['REQUEST_URI']=='/~TAK15_Jakobson/Auto52/public/admin'){
+	reDirectTo(ADMIN_URL . '?page=home');
+}
