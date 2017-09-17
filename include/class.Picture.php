@@ -78,23 +78,23 @@ class Picture extends DatabaseQuery
         } 
 
         if(!file_exists(UPLOAD_PATH . date("Y"))) { 
-            mkdir(UPLOAD_PATH . date("Y"), 0755); 
+            mkdir(UPLOAD_PATH . date("Y"), 0777); 
         } 
 
         if(!file_exists(UPLOAD_PATH . date("Y") . "/" . date("m"))) { 
-            mkdir(UPLOAD_PATH . date("Y") . "/" . date("m"), 0755); 
+            mkdir(UPLOAD_PATH . date("Y") . "/" . date("m"), 0777); 
         } 
 
         if(!file_exists(UPLOAD_PATH_FULL . $this->product_id)) { 
-            mkdir(UPLOAD_PATH_FULL . $this->product_id, 0755); 
+            mkdir(UPLOAD_PATH_FULL . $this->product_id, 0777); 
         } 
 
         if(!file_exists(UPLOAD_PATH_FULL . $this->product_id . DS . PICTURE_MED)) { 
-            mkdir(UPLOAD_PATH_FULL . $this->product_id . DS . PICTURE_MED, 0755); 
+            mkdir(UPLOAD_PATH_FULL . $this->product_id . DS . PICTURE_MED, 0777); 
         } 
 
         if(!file_exists(UPLOAD_PATH_FULL . $this->product_id . DS . PICTURE_THUMB)) { 
-            mkdir(UPLOAD_PATH_FULL . $this->product_id . DS . PICTURE_THUMB, 0755); 
+            mkdir(UPLOAD_PATH_FULL . $this->product_id . DS . PICTURE_THUMB, 0777); 
         } 
     } 
 

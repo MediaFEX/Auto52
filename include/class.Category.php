@@ -40,7 +40,7 @@ class Category extends DatabaseQuery
         $sql = "SELECT * FROM " 
             . PX . self::$table_name . " LIMIT " . $database->escape_value($start) . ", " . $database->escape_value($max); 
 
-        echo $sql; 
+        //echo $sql; 
 
         $result = self::find_by_query($sql); 
 

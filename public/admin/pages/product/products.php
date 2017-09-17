@@ -27,13 +27,16 @@ $countCategories = Product::count_all();
 $pagesCount = ceil( $countCategories / MAX_CATEGORIES);
 ?>
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <h3><a href="<?php echo ADMIN_URL . "?page=product"; ?>"><span class="glyphicon glyphicon-plus-sign"></span> Lisa</a></h3>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <input type="text" class="form-control" placeholder="<?php echo translate('search_placeholder'); ?>" id="search-field">
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
+            <button type="submit" value="search-btn" name="search-btn" class="btn btn-default" id="search-btn">Search</button>
+        </div>
+        <div class="col-sm-3">
             <h3 class="text-right"><?php echo $pages[$page]['name']?></h3>
         </div>
     </div>
@@ -69,13 +72,8 @@ if (!empty($product)) : ?>
                     <?php
 
                         $category_name = Category::find_by_ID2($cat->category_id);
-                        #echo $cat->category_id;
+
                         $id_name=explode(',', $cat->category_id);
-                        #echo "<pre>";
-                        #print_r(Category::find_by_ID2($cat->category_id));
-                        #print_r($category_name);
-                        #echo "</pre>";
-                        #echo empty($id_name)?'Põhikategooria':$category_name->name;
 
                         foreach ($id_name as $key => $value) {
                             if($key!=0){
@@ -97,9 +95,12 @@ if (!empty($product)) : ?>
                     </a>
                 </td>
                 <td>
-                    <a href="<?php echo ADMIN_URL . "?page=delete-product&ID=" . $cat->ID; ?>">
+                    <a class="delete-confirm" href="<?php //echo ADMIN_URL . "?page=delete-product&ID=" . $cat->ID; ?>">
                         <span class="glyphicon glyphicon-trash"></span>
-                    </a>
+                    </a><!--
+                    <a class="delete-confirm">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>-->
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -120,3 +121,4 @@ if (!empty($product)) : ?>
 <?php else :
     echo infoMessage('info', 'Tooted puuduvad');
 endif; ?>
+<script src="<?php echo TEMPLATE_URL; ?>js/custom.js"></script>

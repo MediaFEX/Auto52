@@ -34,7 +34,6 @@ $pagesCount = ceil( $countCategories / MAX_CATEGORIES);
         </div>
     </div>
 
-<?php // echo isset($session->message) ? $session->message : '' ?> 
 
 <?php if (!empty($categories)) : ?> 
     <table class="table"> 

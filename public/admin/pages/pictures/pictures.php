@@ -25,9 +25,9 @@ $btn = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING);
 
 if (isset($btn)) { 
 
-    $p = new Picture(); 
-    $p->product_id = $ID; 
-    $p->makePictureFolders(); 
+    $p = new Picture();
+    $p->product_id = $ID;
+    $p->makePictureFolders();
 
     if (move_uploaded_file($_FILES['file']['tmp_name'], UPLOAD_PATH_FULL . $ID . DS . $_FILES['file']['name'])) { 
         $picture = new Picture(); 
@@ -72,7 +72,7 @@ if (isset($btn)) {
         <hr> 
         <div class="btn-group btn-group-justified" role="group" aria-label="..."> 
             <div class="btn-group" role="group"> 
-                <button class="delete-picture btn btn-danger" data-picture-id="<?php echo $picture->ID; ?>"><span class="glyphicon glyphicon-trash"></span></button> 
+                <button class="delete-picture btn btn-danger" id="target" data-picture-id="<?php echo $picture->ID; ?>"><span class="glyphicon glyphicon-trash"></span></button> 
             </div> 
             <div class="btn-group" role="group"> 
                 <button class="set-main-picture btn btn-success" 

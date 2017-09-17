@@ -21,7 +21,7 @@ defined('PX') ? NULL : define('PX', 'TACOLA_');
 /*
  * CHANGE TWO LINES 20 AND 21-22 
  * */
-$currentSite='Auto52';
+$currentSite='Auto52'; //Also change it for custom.js
 defined('ROOT_URL') ? null : define('ROOT_URL', 'http://ubuntu.ametikool.ee/~TAK15_Jakobson/'.$currentSite.'/');
 defined('ROOT_PATH') ? null : define('ROOT_PATH', DS . 'home'.DS.'TAK15_Jakobson'.DS.'public_html'.DS.$currentSite.DS);
 

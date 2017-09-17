@@ -19,5 +19,6 @@ $product = Product::find_by_ID($ID);
 $product->main_picture = $name; 
 
 if(!$product->save()) { 
-    echo translate("main_picture_save_error"); 
+    echo translate("main_picture_sama_pilt_mis_enne");
+    $product->save();
 }

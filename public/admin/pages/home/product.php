@@ -52,7 +52,7 @@ echo '<ul>';
 <?php if (!empty($pictures)) : foreach ($pictures as $key => $pic) : ?> 
     <?php echo $key % 3 == 0 ? '<div class="clearfix"></div><br>' : '' ?> 
     <div class="col-xs-4"> 
-        <img src="<?php echo makePictureLink($pic) . DS . PICTURE_THUMB . DS . $pic->name; ?>" class="img-responsive"> 
+        <img src="<?php echo makePictureLink($pic) . DS . PICTURE_MED . DS . $pic->name; ?>" class="img-responsive"> 
     </div> 
 <?php endforeach; endif; ?> 
 
