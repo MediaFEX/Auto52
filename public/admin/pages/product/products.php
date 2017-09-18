@@ -72,18 +72,8 @@ if (!empty($product)) : ?>
                     <?php
 
                         $category_name = Category::find_by_ID2($cat->category_id);
-<<<<<<< HEAD
 
                         $id_name=explode(',', $cat->category_id);
-=======
-                        #echo $cat->category_id;
-                        $id_name=explode(',', $cat->category_id);
-                        #echo "<pre>";
-                        #print_r(Category::find_by_ID2($cat->category_id));
-                        #print_r($category_name);
-                        #echo "</pre>";
-                        #echo empty($id_name)?'Põhikategooria':$category_name->name;
->>>>>>> master
 
                         foreach ($id_name as $key => $value) {
                             if($key!=0){
@@ -93,14 +83,11 @@ if (!empty($product)) : ?>
                         }
                         
                     ?>
-<<<<<<< HEAD
                 </td>
                 <td>
                     <a href="<?php echo ADMIN_URL . "?page=pictures&ID=" . $cat->ID; ?>">
                         <span class="glyphicon glyphicon-picture"></span>
                     </a>
-=======
->>>>>>> master
                 </td>
                 <td>
                     <a href="<?php echo ADMIN_URL . "?page=product&ID=" . $cat->ID; ?>">
@@ -108,11 +95,7 @@ if (!empty($product)) : ?>
                     </a>
                 </td>
                 <td>
-<<<<<<< HEAD
                     <a class="delete-confirm" href="<?php //echo ADMIN_URL . "?page=delete-product&ID=" . $cat->ID; ?>">
-=======
-                    <a href="<?php echo ADMIN_URL . "?page/delete-product&ID=" . $cat->ID; ?>">
->>>>>>> master
                         <span class="glyphicon glyphicon-trash"></span>
                     </a><!--
                     <a class="delete-confirm">

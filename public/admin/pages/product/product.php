@@ -30,20 +30,6 @@ if(isset($btn)) {
     $prices = filterArray($_POST['price'], FILTER_VALIDATE_FLOAT);
     $descriptions = filterArray($_POST['description'], FILTER_SANITIZE_STRING);
     $parent = filterArray($_POST['parent'], FILTER_SANITIZE_STRING);
-<<<<<<< HEAD
-=======
-
-//    unset($names['et']);
-//    unset($prices['et']);
-//    unset($descriptions['et']);
-
-    pd($names);
-    pd($prices);
-    pd($descriptions);
-    pd($parent);
-
-//    exit();
->>>>>>> master
 
     if(empty($names['et'])) {
         $errors['name'] = "Nimi ei tohi olla tühi";
@@ -88,13 +74,6 @@ if(isset($btn)) {
 
             $product_id = empty($ID) ? $database->get_last_ID() : $ID;
 
-<<<<<<< HEAD
-=======
-            //unset($names['et']);
-            //unset($prices['et']);
-            //unset($descriptions['et']);
-
->>>>>>> master
             foreach ($names as $lang => $name) {
                 $pLang = ProductLanguage::findByColumnLangProduct('name', $lang, $product_id);
 //                pd($pLang);

@@ -33,7 +33,7 @@ if(isset($btn) && $btn == 'delete') {
     reDirectTo(ADMIN_URL . '?page=categories'); 
 } 
 
-if(empty($ID)) {
+if(empty($ID)) { 
     $session->message('<div class="alert alert-danger">Kategooria puudub</div>'); 
     reDirectTo(ADMIN_URL . '?page=categories'); 
 } 
