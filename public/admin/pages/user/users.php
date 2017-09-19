@@ -21,11 +21,16 @@ if(!empty($ID)) {
 }
 
 $btn = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING);
+<<<<<<< HEAD
 $status = filter_input(INPUT_POST, 'status', FILTER_VALIDATE_INT);
 $email = filter_input(INPUT_POST, 'name', FILTER_VALIDATE_EMAIL);
 $pass = filter_input(INPUT_POST, 'pass', FILTER_SANITIZE_STRING);
 $rights = filter_input(INPUT_POST, 'rights', FILTER_SANITIZE_STRING);
 $lang = filter_input(INPUT_POST, 'lang', FILTER_SANITIZE_STRING);
+=======
+$email = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+$status = filter_input(INPUT_POST, 'status', FILTER_SANITIZE_STRING);
+>>>>>>> master
 
 if(isset($btn)) {
     $errors = [];
@@ -40,6 +45,7 @@ if(isset($btn)) {
 
         if(empty($ID)) {
             $category = new User();
+<<<<<<< HEAD
             $newAcc = 1;
         }
 
@@ -52,6 +58,13 @@ if(isset($btn)) {
         $category->status = $status;
         $category->rights = $rights;
         $category->lang = $lang;
+=======
+        }
+
+        $category->username = $email;
+        $category->added = date("Y-m-d H:i:s");
+        $category->status = $status == 'on' ? 1 : 0;
+>>>>>>> master
 
         if($category->save()) {
             if(empty($ID)) {
@@ -64,7 +77,10 @@ if(isset($btn)) {
 
         $session->message('<div class="alert alert-warning">Kategooriat ei lisatud baasi</div>');
         reDirectTo(ADMIN_URL . '?page=users');
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
     }
 }
 
@@ -74,6 +90,7 @@ if(isset($btn)) {
 <?php echo empty($errors) ? '' : "<ul><li>" . join("</li><li>", $errors) . "</li></ul>"; ?>
 <form method="post">
     <div class="form-group">
+<<<<<<< HEAD
         <label for="name">Email</label>
         <input value="<?php echo isset($category->username) ? $category->username : ''; ?>" name="name" type="text" class="form-control" id="name" placeholder="Lisa email">
     </div>
@@ -98,5 +115,16 @@ if(isset($btn)) {
       <option <?php if(isset($category->lang)&&$category->lang=='en'){echo "selected";} ?> value="en">en</option>
     </select>
 
+=======
+        <label for="name">Nimi</label>
+        <input value="<?php echo isset($category->username) ? $category->username : ''; ?>" name="name" type="text" class="form-control" id="name" placeholder="Lisage nimi">
+    </div>
+    <div class="checkbox">
+        <label>
+            <input name="status" type="checkbox"
+                <?php echo isset($category->status) && $category->status == 1 ? 'checked' : '';?>> Status
+        </label>
+    </div>
+>>>>>>> master
     <button type="submit" value="add" name="action" class="btn btn-default">Loo</button>
 </form>
