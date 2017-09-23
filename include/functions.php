@@ -63,6 +63,9 @@ function userRights($page) {
         case 'delete-product.php': 
             return ['user', 'moderator', 'admin']; 
             break; 
+        case 'delete.php': 
+            return ['user', 'moderator', 'admin']; 
+            break; 
     } 
 } 
 

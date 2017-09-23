@@ -42,8 +42,7 @@ class Picture extends DatabaseQuery
         imagecopyresampled($virtualImage, $sourceImage, 0, 0, 0, 0, $newWidth, $newHeight, $oldWidth, $oldHeight); 
         /* create the physical thumbnail image to its destination */ 
         imagejpeg($virtualImage, $dest); 
-    } 
-
+    }
     public function image_create_from_any($filepath) { 
         $type = exif_imagetype($filepath); // [] if you don't have exif you could use getImageSize() 
         $allowedTypes = array( 
@@ -148,5 +147,23 @@ class Picture extends DatabaseQuery
         $results = self::find_by_query($query); 
 
         return empty($results) ? false : array_shift($results); 
-    } 
+    }
+    public static function getPictureCount($ID) {
+        global $database;
+
+        if(empty($ID)) {
+            return false;
+        }
+
+        $sql = "SELECT COUNT(product_id) FROM " . PX . self::$table_name
+            . " WHERE product_id=" . $database->escape_value($ID); //SELECT COUNT(product_id) FROM `TACOLA_pictures` WHERE product_id=1;
+
+        $result = $database->query($sql);
+        $row = $database->fetch_array($result);
+        echo '<pre>';
+        print_r($row);
+        echo '</pre>';
+        return array_shift($row);
+    }
+
 }

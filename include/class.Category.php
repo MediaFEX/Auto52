@@ -22,6 +22,23 @@ class Category extends DatabaseQuery
     public $added; 
     public $status; 
 
+
+
+    public static function find_by_name($s = "") { 
+        global $database; 
+
+        if(empty($s)) { 
+            return false; 
+        } 
+
+        $query = "SELECT * FROM " . PX . self::$table_name 
+            . " WHERE name LIKE '%" . $database->escape_value($s) . "%'"; 
+
+        $results = self::find_by_query($query); 
+
+        return empty($results) ? false : $results; 
+    } 
+    
     public static function find_parent($ID) { 
         global $database; 
 

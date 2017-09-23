@@ -1,129 +1,72 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: andrus.jakobson
- * Date: 9.03.2017
- * Time: 14:18
- */
+<?php 
+/** 
+ * Created by PhpStorm. 
+ * User: janek.mander 
+ * Date: 6.03.2017 
+ * Time: 11:11 
+ */ 
+
 if(!defined('MAIN_PATH')) { 
     header("Location: /"); 
     exit(); 
-} 
+}
 
-?> 
-<div class="row"> 
-    <div class="col-sm-4"> 
-        <h3><a href="<?php echo ADMIN_URL . "?page=product"; ?>"><span class="glyphicon glyphicon-plus-sign"></span> Lisa</a></h3> 
-    </div> 
-    <div class="col-sm-4"> 
-        <input type="text" class="form-control" placeholder="<?php echo translate('search_placeholder'); ?>" id="search-field"> 
-    </div> 
-    <div class="col-sm-4"> 
-        <h3 class="text-right"><?php echo $pages[$page]['name'] ?></h3> 
-    </div> 
-</div> 
-
-
-<<<<<<< HEAD
-<div class="row"> 
-    <div class="col-lg-12"> 
-        <?php echo isset($session->message) ? $session->message : '' ?> 
-        <div id="product-content"></div> 
-    </div> 
-</div> 
-=======
-$product = Product::findAll($pageNrInDb, MAX_CATEGORIES);
-
-$countCategories = Product::count_all();
-
-$pagesCount = ceil( $countCategories / MAX_CATEGORIES);
 ?>
-    <div class="row">
-        <div class="col-sm-4">
-            <h3><a href="<?php echo ADMIN_URL . "?page=product"; ?>"><span class="glyphicon glyphicon-plus-sign"></span> Lisa</a></h3>
-        </div>
-        <div class="col-sm-4">
-            <input type="text" class="form-control" placeholder="<?php echo translate('search_placeholder'); ?>" id="search-field">
-        </div>
-        <div class="col-sm-4">
-            <h3 class="text-right"><?php echo $pages[$page]['name']?></h3>
-        </div>
+<div class="row">
+    <div class="col-sm-4">
+        <h3><a href="<?php echo ADMIN_URL . "?page=product"; ?>"><span class="glyphicon glyphicon-plus-sign"></span> Lisa</a></h3>
     </div>
+    <div class="col-sm-4">
+        <input type="text" class="form-control" placeholder="<?php echo translate('search_placeholder'); ?>" id="search-field">
+    </div>
+    <div class="col-sm-4">
+        <h3 class="text-right"><?php echo $pages[$page]['name'] ?></h3>
+    </div>
+</div>
 
-<?php /*
 <div class="row">
     <div class="col-lg-12">
         <?php echo isset($session->message) ? $session->message : '' ?>
         <div id="product-content"></div>
     </div>
 </div>
-*/
-if (!empty($product)) : ?>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nimi</th>
-            <th>Lisatud</th>
-            <th>Vanem</th>
-            <th>Muuda</th>
-            <th>Kustuta</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php foreach ($product as $cat) : ?>
-            <tr>
-                <td><?php echo $cat->ID?></td>
-                <td><?php echo $cat->name?></td>
-                <td><?php echo $cat->added?></td>
-                <td>
-                    <?php
+<?php
+//require_once('search.php');
 
-                        $category_name = Category::find_by_ID2($cat->category_id);
-                        #echo $cat->category_id;
-                        $id_name=explode(',', $cat->category_id);
-                        #echo "<pre>";
-                        #print_r(Category::find_by_ID2($cat->category_id));
-                        #print_r($category_name);
-                        #echo "</pre>";
-                        #echo empty($id_name)?'Põhikategooria':$category_name->name;
 
-                        foreach ($id_name as $key => $value) {
-                            if($key!=0){
-                                echo ", ";
-                            }
-                            echo empty($id_name)?'Põhikategooria':$category_name[$key]->name;
-                        }
-                        
-                    ?>
-                </td>
-                <td>
-                    <a href="<?php echo ADMIN_URL . "?page=product&ID=" . $cat->ID; ?>">
-                        <span class="glyphicon glyphicon-pencil"></span>
-                    </a>
-                </td>
-                <td>
-                    <a href="<?php echo ADMIN_URL . "?page/delete-product&ID=" . $cat->ID; ?>">
-                        <span class="glyphicon glyphicon-trash"></span>
-                    </a>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-        </tbody>
-    </table>
+$pageNr = filter_input(INPUT_GET, 'pageNr', FILTER_VALIDATE_INT);
+if(!empty($pageNr)){
+    $_SESSION['pageNr']=$pageNr;
+}else{
+    $_SESSION['pageNr']='empty';
+}
+
+$next = $pageNr+1;
+$previous = $pageNr-1;
+
+if(empty($pageNr)) {
+    $pageNrInDb = 0;
+} else {
+    $pageNrInDb = $pageNr * MAX_CATEGORIES;
+}
+
+$countCategories = Product::count_all();
+
+$pagesCount = ceil( $countCategories / MAX_CATEGORIES);
+
+?>
     <ul class="pager">
         <?php if(!empty($pageNr)) : ?>
             <?php if($pageNr == 1) : ?>
-                <li><a href="<?php echo ADMIN_URL . "?page=products"; ?>"><?php echo translate("previous_btn") ?></a></li>
+                <li><a id="previous" value="<?php echo $previous; ?>" href="<?php echo ADMIN_URL . "?page=products"; ?>"><?php echo translate("previous_btn") ?></a></li>
             <?php else: ?>
-                <li><a href="<?php echo ADMIN_URL . "?page=products&pageNr=" . $previous; ?>"><?php echo translate("previous_btn") ?></a></li>
+                <li><a id="previous" value="<?php echo $previous; ?>" href="<?php echo ADMIN_URL . "?page=products&pageNr=" . $previous; ?>"><?php echo translate("previous_btn") ?></a></li>
             <?php endif; ?>
         <?php endif; ?>
         <?php if($pagesCount-1 > $pageNr ) : ?>
-            <li><a href="<?php echo ADMIN_URL . "?page=products&pageNr=" . $next; ?>"><?php echo translate("next_btn") ?></a></li>
+            <?php /*<li><a id="next" value="<?php echo $next; ?>" href="<?php echo ADMIN_URL . "?page=products&pageNr=" . $next; ?>"><?php echo translate("next_btn") ?></a></li> */?>
+            <li><a id="next" value="<?php echo $next; ?>" href="<?php echo ADMIN_URL . "?page=products&pageNr=" . $next; ?>" ><?php echo translate("next_btn") ?></a></li>
         <?php endif; ?>
     </ul>
-<?php else :
-    echo infoMessage('info', 'Tooted puuduvad');
-endif; ?>
->>>>>>> master
+
+<script src="<?php echo TEMPLATE_URL; ?>js/custom.js"></script>

@@ -4,7 +4,7 @@
 
 $("#search-btn").click(function () { 
     var search = $("#search-field").val(); 
-    searchProduct(search);
+    searchProduct(search); 
 }); 
 
 $("#search-field").keyup(function () { 
@@ -26,6 +26,6 @@ function searchProduct(s) {
         url: admin_url + "pages/product/search.php" 
     }) 
     .done(function( data ) { 
-        $("#product-content").html(data); 
+        $("#product-content").html(data);
     }); 
-} 
+}

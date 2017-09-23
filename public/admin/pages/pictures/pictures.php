@@ -21,34 +21,45 @@ if(!empty($ID)) {
     } 
 } 
 
+
+$pictureCount=Picture::getPictureCount($ID);
+print_r($pictureCount);
+
+
 $btn = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING); 
 
-if (isset($btn)) { 
+if (isset($btn)){ 
+    if($pictureCount<MAX_UPLOAD){
 
-    $p = new Picture();
-    $p->product_id = $ID;
-    $p->makePictureFolders();
 
-    if (move_uploaded_file($_FILES['file']['tmp_name'], UPLOAD_PATH_FULL . $ID . DS . $_FILES['file']['name'])) { 
-        $picture = new Picture(); 
-        $picture->name = $_FILES['file']['name']; 
-        $picture->product_id = $ID; 
-        $picture->added = date("Y-m-d H:i:s"); 
-        $picture->added_by = $_SESSION['user_id']; 
-        $picture->edited_by = $_SESSION['user_id']; 
-        $picture->status = 1; 
+        $p = new Picture();
+        $p->product_id = $ID;
+        $p->makePictureFolders();
 
-        $picture->save(); 
+        if (move_uploaded_file($_FILES['file']['tmp_name'], UPLOAD_PATH_FULL . $ID . DS . $_FILES['file']['name'])) { 
+            $picture = new Picture(); 
+            $picture->name = $_FILES['file']['name']; 
+            $picture->product_id = $ID; 
+            $picture->added = date("Y-m-d H:i:s"); 
+            $picture->added_by = $_SESSION['user_id']; 
+            $picture->edited_by = $_SESSION['user_id']; 
+            $picture->status = 1; 
 
-        $picture->resizePicture(); 
+            $picture->save(); 
 
-        $session->message('<div class="alert alert-success">Pilt laeti ülesse.</div>'); 
-        reDirectTo(ADMIN_URL . '?page=pictures&ID=' . $ID); 
-    } 
+            $picture->resizePicture(); 
 
-    $session->message('<div class="alert alert-warning">Pilti ei laetud ülesse.</div>'); 
-    reDirectTo(ADMIN_URL . '?page=pictures&ID=' . $ID); 
-} 
+            $session->message('<div class="alert alert-success">Pilt laeti ülesse.</div>'); 
+            reDirectTo(ADMIN_URL . '?page=pictures&ID=' . $ID); 
+        } 
+
+        $session->message('<div class="alert alert-warning">Pilti ei laetud ülesse.</div>'); 
+        reDirectTo(ADMIN_URL . '?page=pictures&ID=' . $ID);
+    }
+    $session->message('<div class="alert alert-warning">Ei saa olla rohkem kui 5 pilti!.</div>'); 
+    reDirectTo(ADMIN_URL . '?page=pictures&ID=' . $ID);
+}
+
 ?> 
 
 <h3 class="page-header"> 

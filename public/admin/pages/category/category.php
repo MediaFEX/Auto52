@@ -6,34 +6,34 @@
  * Time: 13:38
  */
 
-if(!defined('MAIN_PATH')) { 
-    header("Location: /"); 
-    exit(); 
-} 
+if(!defined('MAIN_PATH')) {
+    header("Location: /");
+    exit();
+}
 
-$ID = filter_input(INPUT_GET, 'ID', FILTER_VALIDATE_INT); 
-if(!empty($ID)) { 
-    $category = Category::find_by_ID($ID); 
+$ID = filter_input(INPUT_GET, 'ID', FILTER_VALIDATE_INT);
+if(!empty($ID)) {
+    $category = Category::find_by_ID($ID);
 
-    if(empty($category)) { 
-        $session->message('<div class="alert alert-danger">Kategooria puudub</div>'); 
-        reDirectTo(ADMIN_URL . '?page=categories'); 
-    } 
-} 
+    if(empty($category)) {
+        $session->message('<div class="alert alert-danger">Kategooria puudub</div>');
+        reDirectTo(ADMIN_URL . '?page=categories');
+    }
+}
 
-$btn = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING); 
-$name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING); 
-$parent = filter_input(INPUT_POST, 'parent', FILTER_VALIDATE_INT); 
-$status = filter_input(INPUT_POST, 'status', FILTER_SANITIZE_STRING); 
+$btn = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING);
+$name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+$parent = filter_input(INPUT_POST, 'parent', FILTER_VALIDATE_INT);
+$status = filter_input(INPUT_POST, 'status', FILTER_SANITIZE_STRING);
 
 if(isset($btn)) { 
     $errors = []; 
 
-    if(empty($name)) { 
-        $errors['name'] = "Nimi ei tohi olla tühi"; 
-    } elseif (strlen($name) > 100) { 
-        $errors['name'] = "Nimi ei tohi olla pikem kui 100 ühikut"; 
-    } 
+    if(empty($name)) {
+        $errors['name'] = "Nimi ei tohi olla tühi";
+    } elseif (strlen($name) > 100) {
+        $errors['name'] = "Nimi ei tohi olla pikem kui 100 ühikut";
+    }
 
     if(empty($errors)) { 
 

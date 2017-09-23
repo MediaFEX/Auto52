@@ -87,11 +87,6 @@ class User extends DatabaseQuery
         $sql = "SELECT * FROM "
             . PX . self::$table_name . " LIMIT " . $database->escape_value($start) . ", " . $database->escape_value($max);
 
-<<<<<<< HEAD
-=======
-        echo $sql;
-
->>>>>>> master
         $result = self::find_by_query($sql);
 
         return !empty($result) ? $result : false;

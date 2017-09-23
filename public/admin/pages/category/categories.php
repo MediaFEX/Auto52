@@ -63,9 +63,11 @@ $pagesCount = ceil( $countCategories / MAX_CATEGORIES);
                     </a>
                 </td>
                 <td>
-                    <a href="<?php echo ADMIN_URL . "?page=delete&ID=" . $cat->ID; ?>">
-                        <span class="glyphicon glyphicon-trash"></span>
-                    </a>
+                <span 
+                        data-url="pages/category/delete" 
+                        data-delete-id="<?php echo $cat->ID; ?>" 
+                        class="glyphicon glyphicon-trash bg-danger delete-confirm" 
+                        style="cursor: pointer;"></span> 
                 </td>
             </tr>
         <?php endforeach; ?> 

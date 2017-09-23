@@ -21,7 +21,7 @@ defined('PX') ? NULL : define('PX', 'TACOLA_');
 /*
  * CHANGE TWO LINES 20 AND 21-22 
  * */
-$currentSite='Auto52'; //Also change it for custom.js
+$currentSite='BackupAuto52'; //Also change it for custom.js
 defined('ROOT_URL') ? null : define('ROOT_URL', 'http://ubuntu.ametikool.ee/~TAK15_Jakobson/'.$currentSite.'/');
 defined('ROOT_PATH') ? null : define('ROOT_PATH', DS . 'home'.DS.'TAK15_Jakobson'.DS.'public_html'.DS.$currentSite.DS);
 
@@ -96,6 +96,7 @@ $languagesInPage = ['en'];
 //Added constants 
 defined('MAX_PASS_LENGTH') ? null : define('MAX_PASS_LENGTH', 3); 
 defined('MAX_CATEGORIES') ? null : define('MAX_CATEGORIES', 5);
+defined('MAX_UPLOAD') ? null : define('MAX_UPLOAD', 5);
 
 if($_SERVER['REQUEST_URI']=='/~TAK15_Jakobson/Auto52/public/admin/index.php'||$_SERVER['REQUEST_URI']=='/~TAK15_Jakobson/Auto52/public/admin/'||$_SERVER['REQUEST_URI']=='/~TAK15_Jakobson/Auto52/public/admin'){
 	reDirectTo(ADMIN_URL . '?page=home');

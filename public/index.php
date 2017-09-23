@@ -35,7 +35,7 @@ if (isset($btn) && $btn == 'login') {
             //kui kõik okei, siis suuname index.php lehel
             $session->login($user);
             $session->message('<div class="alert alert-success">Login oli edukas!</div>');
-            reDirectTo('index.php');
+            reDirectTo('admin/index.php');
         }
 
         $session->message('<div class="alert alert-danger">Kasutajanimi ja parool ei klapi!</div>');

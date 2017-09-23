@@ -32,7 +32,6 @@ class Product extends DatabaseQuery
     public $edited_by; 
     public $status; 
 
-<<<<<<< HEAD
     /*public static function 
     name($s = "") { 
         global $database; 
@@ -50,10 +49,6 @@ class Product extends DatabaseQuery
     }*/ 
 
     public static function find_by_name($s = "") { 
-=======
-    public static function 
-    name($s = "") { 
->>>>>>> master
         global $database; 
 
         if(empty($s)) { 

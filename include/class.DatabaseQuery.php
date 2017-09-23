@@ -26,6 +26,7 @@ class DatabaseQuery
 
         $result = $database->query($sql);
         $row = $database->fetch_array($result);
+        //print_r($row);
         return array_shift($row);
     }
 

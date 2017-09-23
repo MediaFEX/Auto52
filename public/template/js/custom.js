@@ -4,15 +4,15 @@
  */
 
 
-var admin_url = "http://ubuntu.ametikool.ee/~TAK15_Jakobson/Auto52/public/admin/";
+var admin_url = "http://ubuntu.ametikool.ee/~TAK15_Jakobson/BackupAuto52/public/admin/";
 
 $(".delete-confirm").click(function () { 
-    var title = "Are you sure?*"; 
-    var text = "You will not be able to recover this imaginary file!*"; 
-    var confirmButtonText = "Yes, delete it!*"; 
+    var title = "Are you sure?"; 
+    var text = "You will not be able to recover this."; 
+    var confirmButtonText = "Yes, delete it!"; 
 
-    var heading_1 = "Deleted*"; 
-    var confirm_text = "Your imaginary file has been deleted.*"; 
+    var heading_1 = "Deleted"; 
+    var confirm_text = "Your imaginary file has been deleted."; 
 
     var ID = $(this).data("delete-id"); 
     var url = $(this).data("url"); 
@@ -44,6 +44,8 @@ $(".delete-confirm").click(function () {
         }); 
     }); 
 }); 
+
+
 
 $(".delete-picture").click(function () { 
     var ID = $(this).data("picture-id"); 
@@ -104,4 +106,41 @@ $(".make-default-lang").click(function () {
             } 
 
         }); 
-}); 
+});
+
+function openModal() {
+  document.getElementById('myModal').style.display = "block";
+}
+
+function closeModal() {
+  document.getElementById('myModal').style.display = "none";
+}
+
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  var captionText = document.getElementById("caption");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+  captionText.innerHTML = dots[slideIndex-1].alt;
+}
