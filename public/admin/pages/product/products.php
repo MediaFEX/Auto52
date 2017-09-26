@@ -44,14 +44,13 @@ if(!empty($pageNr)){
 $next = $pageNr+1;
 $previous = $pageNr-1;
 
-if(empty($pageNr)) {
-    $pageNrInDb = 0;
-} else {
-    $pageNrInDb = $pageNr * MAX_CATEGORIES;
+
+//HERE
+if($_SESSION['rights']=='admin'||$_SESSION['rights']=='moderator'){
+    $countCategories = Product::count_all();
+}else{
+    $countCategories = Product::count_allWhere('added_by='.$_SESSION['user_id']);
 }
-
-$countCategories = Product::count_all();
-
 $pagesCount = ceil( $countCategories / MAX_CATEGORIES);
 
 ?>

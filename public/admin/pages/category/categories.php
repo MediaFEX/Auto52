@@ -28,11 +28,14 @@ $pagesCount = ceil( $countCategories / MAX_CATEGORIES);
 
 
 ?> 
-    <div class="row">
-        <div class="col-sm-4">
-            <h3><a href="<?php echo ADMIN_URL . "?page=category"; ?>"><span class="glyphicon glyphicon-plus-sign"></span> Lisa</a></h3>
-        </div>
+<div class="row">
+    <div class="col-sm-8">
+        <h3><a href="<?php echo ADMIN_URL . "?page=category"; ?>"><span class="glyphicon glyphicon-plus-sign"></span> Lisa</a></h3>
     </div>
+    <div class="col-sm-4">
+        <h3 class="text-right"><?php echo $pages[$page]['name'] ?></h3>
+    </div>
+</div>
 
 
 <?php if (!empty($categories)) : ?> 

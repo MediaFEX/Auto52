@@ -9,7 +9,7 @@ if(!defined('MAIN_PATH')) {
     header("Location: /");
     exit();
 }
-
+echo $_SESSION['rights'];
 $pageNr = filter_input(INPUT_GET, 'pageNr', FILTER_VALIDATE_INT);
 $next = $pageNr+1;
 $previous = $pageNr-1;
@@ -20,17 +20,24 @@ if(empty($pageNr)) {
     $pageNrInDb = $pageNr * MAX_CATEGORIES;
 }
 
-$categories = User::findAll($pageNrInDb, MAX_CATEGORIES);
+if($_SESSION['rights']==='admin'){
+    $categories = User::findAll($pageNrInDb, MAX_CATEGORIES);
+    $countCategories = User::count_all();
+    $pagesCount = ceil( $countCategories / MAX_CATEGORIES);
+}else{
+    $categories = User::find_by_ID2($_SESSION['user_id']);
+}
 
-$countCategories = User::count_all();
 
-$pagesCount = ceil( $countCategories / MAX_CATEGORIES);
 
 
 ?>
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-8">
             <h3><a href="<?php echo ADMIN_URL . "?page=users"; ?>"><span class="glyphicon glyphicon-plus-sign"></span> Lisa</a></h3>
+        </div>
+        <div class="col-sm-4">
+            <h3 class="text-right"><?php echo $pages[$page]['name'] ?></h3>
         </div>
     </div>
 <?php // echo isset($session->message) ? $session->message : '' ?>
@@ -70,6 +77,8 @@ $pagesCount = ceil( $countCategories / MAX_CATEGORIES);
         <?php endforeach; ?>
         </tbody>
     </table>
+
+    <?php if($_SESSION['rights']=='admin'): ?>
     <ul class="pager">
         <?php if(!empty($pageNr)) : ?>
             <?php if($pageNr == 1) : ?>
@@ -82,6 +91,6 @@ $pagesCount = ceil( $countCategories / MAX_CATEGORIES);
             <li><a href="<?php echo ADMIN_URL . "?page=user&pageNr=" . $next; ?>"><?php echo translate("next_btn") ?></a></li>
         <?php endif; ?>
     </ul>
-<?php else :
+<?php endif; else :
     echo infoMessage('info', 'Kategooriad puuduvad');
 endif; ?>

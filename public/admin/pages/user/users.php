@@ -68,6 +68,14 @@ if(isset($btn)) {
     }
 }
 
+$statusArr=[0,1];
+$rightsArr=['user','moderator','admin'];
+$languagesArr=['et','en'];
+
+print_r($status);
+
+
+
 ?>
 <h3 class="page-header text-right"><?php echo $pages[$page]['name'] ?></h3>
 <?php echo isset($session->message) ? $session->message : '' ?>
@@ -81,22 +89,60 @@ if(isset($btn)) {
         <label for="name">Password</label>
         <input name="pass" type="text" class="form-control" id="pass" placeholder="Muuda parool">
     </div>
+<?php
+if(!isset($category)){
+    $category='';
+}
+if($_SESSION['rights']=='admin'){
+    createSelect($statusArr, $category, 'status', 'Status', '');
+
+    createSelect($rightsArr, $category, 'rights', 'Rights', '');
+
+    createSelect($languagesArr, $category, 'lang', 'Language', '');
+}else{
+    createSelect($statusArr, $category, 'status', 'Status', 'disabled');
+
+    createSelect($rightsArr, $category, 'rights', 'Rights', 'disabled');
+
+    createSelect($languagesArr, $category, 'lang', 'Language', 'disabled');
+}
+?>
+
+
+
+    <button type="submit" value="add" name="action" class="btn btn-default">Loo</button>
+</form>
+<?php
+
+
+
+/*
+
+
     <label for="status">Status</label>
     <select name="status" class="form-control">
       <option <?php if(isset($category->status)&&$category->status==0){echo "selected";} ?> value="0">0</option>
       <option <?php if(isset($category->status)&&$category->status==1){echo "selected";} ?> value="1">1</option>
     </select>
+
+
     <label for="status">Rights</label>
     <select name="rights" class="form-control">
       <option <?php if(isset($category->rights)&&$category->rights=='user'){echo "selected";} ?> value="user">User</option>
       <option <?php if(isset($category->rights)&&$category->rights=='moderator'){echo "selected";} ?> value="moderator">Moderator</option>
       <option <?php if(isset($category->rights)&&$category->rights=='admin'){echo "selected";} ?> value="admin">Admin</option>
     </select>
+
     <label for="status">Language</label>
     <select name="lang" class="form-control">
       <option <?php if(isset($category->lang)&&$category->lang=='et'){echo "selected";} ?> value="et">et</option>
       <option <?php if(isset($category->lang)&&$category->lang=='en'){echo "selected";} ?> value="en">en</option>
     </select>
 
-    <button type="submit" value="add" name="action" class="btn btn-default">Loo</button>
-</form>
+
+
+
+
+
+
+*/

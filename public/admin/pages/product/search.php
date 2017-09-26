@@ -7,7 +7,7 @@
  */ 
 require_once "../../../../include/start.php"; 
 
-
+$ID=$_SESSION['user_id'];
 
 $name = filter_input(INPUT_POST, 's', FILTER_SANITIZE_STRING); 
 
@@ -18,11 +18,22 @@ if($pageNr=='empty'){
     $pageNrInDb = $pageNr * MAX_CATEGORIES;
 }
 
-if(empty($name)) {
+
+
+if($_SESSION['rights']=='admin'||$_SESSION['rights']=='moderator'){
+    if(empty($name)) {
     $products = Product::findAll($pageNrInDb, MAX_CATEGORIES);
-} else {
-    $products = Product::find_by_name($name);
+    } else {
+        $products = Product::find_by_name($name);
+    }
+}else{
+    if(empty($name)) {
+        $products = Product::find_user_all($pageNrInDb, MAX_CATEGORIES, $ID);
+    } else {
+        $products = Product::find_by_user_product_name($name, $ID);
+    }
 }
+
 ?>
 
 <?php if (!empty($products)) : ?>

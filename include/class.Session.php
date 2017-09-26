@@ -55,7 +55,7 @@ class Session
         if($user) {
             $this->user_id = $_SESSION['user_id'] = $user->ID;
             $this->lang = $_SESSION['lang'] = $user->lang;
-            $this->lang = $_SESSION['rights'] = $user->rights;
+            $this->rights = $_SESSION['rights'] = $user->rights;
             $this->logged_in = true;
         }
     }

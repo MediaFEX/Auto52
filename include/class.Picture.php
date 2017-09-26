@@ -73,7 +73,7 @@ class Picture extends DatabaseQuery
 
     public function makePictureFolders() { 
         if(!file_exists(UPLOAD_PATH)) { 
-            mkdir(UPLOAD_PATH, 0755); 
+            mkdir(UPLOAD_PATH, 0777); 
         } 
 
         if(!file_exists(UPLOAD_PATH . date("Y"))) { 

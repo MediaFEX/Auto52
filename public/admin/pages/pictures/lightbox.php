@@ -78,55 +78,12 @@ body {
   cursor: pointer
 }
 
-/* Next & previous buttons */
-.prev,
-.next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  padding: 16px;
-  margin-top: -50px;
-  color: white;
-  font-weight: bold;
-  font-size: 20px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-  -webkit-user-select: none;
-}
-
-/* Position the "next button" to the right */
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover,
-.next:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-/* Number text (1/3 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
 
 img {
   margin-bottom: -4px;
 }
 
-.caption-container {
-  text-align: center;
-  background-color: black;
-  padding: 2px 16px;
-  color: white;
-}
+
 
 .demo {
   opacity: 0.6;
@@ -144,79 +101,49 @@ img.hover-shadow {
 .hover-shadow:hover {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
 }
-#lightbox {
-    position:fixed; /* keeps the lightbox window in the current viewport */
-    top:0; 
-    left:0; 
-    width:100%; 
-    height:100%; 
-    background-color:#000;
-    text-align:center;
-}
+
 </style>
 <body>
 
 <h2 style="text-align:center">Lightbox</h2>
 
 <div class="row">
-  <div id="lightbox" class="column">
-    <img  src="https://www.w3schools.com/css/img_fjords.jpg" style="width:100%" onclick="openModal();currentSlide(1)" class="hover-shadow cursor">
-  </div>
-  <div class="column">
-    <img src="https://www.w3schools.com/css/img_fjords.jpg" style="width:100%" onclick="openModal();currentSlide(2)" class="hover-shadow cursor">
-  </div>
-  <div class="column">
-    <img src="https://www.w3schools.com/css/img_fjords.jpg" style="width:100%" onclick="openModal();currentSlide(3)" class="hover-shadow cursor">
-  </div>
-  <div class="column">
-    <img src="https://www.w3schools.com/css/img_fjords.jpg" style="width:100%" onclick="openModal();currentSlide(4)" class="hover-shadow cursor">
-  </div>
+<?php 
+
+$product = Product::find_by_ID(11);
+$pictures = Picture::getPicturesByProduct($product->ID);
+
+
+
+if (!empty($pictures)) : foreach ($pictures as $key => $pic) : ?> 
+    <?php echo $key % 3 == 0 ? '<div class="clearfix"></div><br>' : '' ?> 
+    <div class="col-xs-4"> 
+        <img src="<?php echo makePictureLink($pic) . DS . PICTURE_THUMB . DS . $pic->name; ?>" style="width:100%" class="img-fluid img-thumbnail fixedSize hover-shadow cursor" onclick="openModal()">
+    </div> 
+<?php endforeach; endif;
+
+
+
+  if (!empty($pictures)) : foreach ($pictures as $key => $pic) :
+              if($key==0){
+                  echo '<div id="lightbox" class="column">';
+                    echo '<img src="'.makePictureLink($pic) . $pic->name.'" style="width:100%" class="img-thumbnail" onclick="openModal()" ';
+                  echo '</div>';
+              }else{
+                  echo '<div class="col-lg-2 col-md-4 col-xs-6 column">';
+                      echo '<img src="'.makePictureLink($pic) . DS . PICTURE_THUMB . DS . $pic->name.'" style="width:100%" class="img-fluid img-thumbnail fixedSize hover-shadow cursor" onclick="openModal()">';
+                  echo '</div>';
+              }
+  endforeach; endif;
+?>
 </div>
+
+
 
 <div id="myModal" class="modal">
   <span class="close cursor" onclick="closeModal()">&times;</span>
   <div class="modal-content">
 
-    <div class="mySlides">
-      <div class="numbertext">1 / 4</div>
-      <img src="https://www.w3schools.com/css/img_fjords.jpg" style="width:100%">
-    </div>
-
-    <div class="mySlides">
-      <div class="numbertext">2 / 4</div>
-      <img src="https://www.w3schools.com/css/img_fjords.jpg" style="width:100%">
-    </div>
-
-    <div class="mySlides">
-      <div class="numbertext">3 / 4</div>
-      <img src="https://www.w3schools.com/css/img_fjords.jpg" style="width:100%">
-    </div>
-    
-    <div class="mySlides">
-      <div class="numbertext">4 / 4</div>
-      <img src="https://www.w3schools.com/css/img_fjords.jpg" style="width:100%">
-    </div>
-    
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-    <div class="caption-container">
-      <p id="caption"></p>
-    </div>
-
-
-    <div class="column">
-      <img class="demo cursor" src="https://www.w3schools.com/css/img_fjords.jpg" style="width:100%" onclick="currentSlide(1)">
-    </div>
-    <div class="column">
-      <img class="demo cursor" src="https://www.w3schools.com/css/img_fjords.jpg" style="width:100%" onclick="currentSlide(2)">
-    </div>
-    <div class="column">
-      <img class="demo cursor" src="https://www.w3schools.com/css/img_fjords.jpg" style="width:100%" onclick="currentSlide(3)">
-    </div>
-    <div class="column">
-      <img class="demo cursor" src="https://www.w3schools.com/css/img_fjords.jpg style="width:100%" onclick="currentSlide(4)">
-    </div>
   </div>
 </div>
 
@@ -229,34 +156,6 @@ function closeModal() {
   document.getElementById('myModal').style.display = "none";
 }
 
-var slideIndex = 1;
-showSlides(slideIndex);
-
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
-
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("demo");
-  var captionText = document.getElementById("caption");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
-  captionText.innerHTML = dots[slideIndex-1].alt;
-}
 </script>
     
 </body>

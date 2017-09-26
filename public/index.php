@@ -80,7 +80,7 @@ if (isset($btn) && $btn == 'register') {
         $user->username = $username;
         $passCrypt = better_crypt($pass);
         $user->password = $passCrypt;
-        $user->lang = 'et';
+        $user->lang = 'en';
         $user->rights = 'user';
         $user->added = date("Y-m-d H:i:s");
         $user->status = 0;
@@ -89,12 +89,12 @@ if (isset($btn) && $btn == 'register') {
 
             //3. loome objecti ConfirmEmail
             ////4. sisestame andmed objekti
-            $eConfirm = new EmailConfirm();
-            $eConfirm->user_id = $database->get_last_ID();
+            //$eConfirm = new EmailConfirm();
+            //$eConfirm->user_id = $database->get_last_ID();
             //1. vaja genereerida suvaline hash (a-A0-9)
             //2. kontroll ega ei ole baasis sellist hashi
-            $eConfirm->hash = EmailConfirm::getHash(10);
-            $eConfirm->added = date("Y-m-d H:i:s");
+            //$eConfirm->hash = EmailConfirm::getHash(10);
+            //$eConfirm->added = date("Y-m-d H:i:s");
 
             //5. salvestame
             if($eConfirm->save()) {

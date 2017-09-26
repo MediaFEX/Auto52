@@ -26,9 +26,18 @@ class DatabaseQuery
 
         $result = $database->query($sql);
         $row = $database->fetch_array($result);
-        //print_r($row);
         return array_shift($row);
     }
+    public static function count_allWhere($where) {
+        global $database;
+        $sql = "SELECT COUNT(*) FROM "
+            . PX . static::$table_name." WHERE ".$where;
+
+        $result = $database->query($sql);
+        $row = $database->fetch_array($result);
+        return array_shift($row);
+    }
+
 
     public static function find_by_ID($ID = 0) {
         global $database;

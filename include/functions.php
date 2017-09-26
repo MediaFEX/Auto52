@@ -120,33 +120,50 @@ function translate($translate, $l = null) {
 
     } 
 
-    return isset($t[$translate]) ? $t[$translate] : "[" . $translate . "]"; 
+    return isset($t[$translate]) ? $t[$translate] : "[" . $translate . "]";
 
-} 
+}
 
-function filterArray ($array, $filter) { 
+function filterArray ($array, $filter) {
 
-    if(empty($array)) { 
-        return false; 
-    } 
+    if(empty($array)) {
+        return false;
+    }
 
-    foreach ($array as $key => $value) { 
-        $array[$key] = filter_var($value, $filter); 
-    } 
+    foreach ($array as $key => $value) {
+        $array[$key] = filter_var($value, $filter);
+    }
 
-    return $array; 
-} 
+    return $array;
+}
 
-function createCategoryArray ($categories) { 
-    if(empty($categories)) { 
-        return false; 
-    } 
+function createCategoryArray ($categories) {
+    if(empty($categories)) {
+        return false;
+    }
 
-    $array = []; 
+    $array = [];
 
-    foreach ($categories as $category) { 
-        $array[$category->parent][] = $category; 
-    } 
+    foreach ($categories as $category) {
+        $array[$category->parent][] = $category;
+    }
 
-    return $array; 
+    return $array;
+}
+
+function createSelect($array, $object, $name, $whyLang, $disabled){
+    if(empty($array)){
+        return false;
+    }
+    ?>
+    <div class="form-group">
+        <label for="<?php echo $whyLang; ?>"><?php echo $whyLang; ?></label>
+        <select <?php echo $disabled; ?> name="<?php echo $name ?>" class="form-control">
+            <?php
+            foreach ($array as $key => $value):?>
+                <option <?php if(isset($object->$name)&&$object->$name==$value){echo "selected";} ?> value="<?php echo $value; ?>"><?php echo $value; ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+    <?php
 }

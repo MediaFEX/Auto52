@@ -28,7 +28,9 @@ get_template('head'); ?>
                 <ul class="nav nav-pills nav-stacked">
                     <li role="presentation" <?php echo !isset($page) || in_array($page, ['home', 'product-view']) ? 'class="active"' : ''; ?>><a href="<?php echo ADMIN_URL; ?>?page=home">Home</a></li>
                     <li role="presentation" <?php echo in_array($page, ['user', 'users']) ? 'class="active"' : ''; ?>><a href="<?php echo ADMIN_URL; ?>?page=user">Kasutajad</a></li>
+                    <?php if($_SESSION['rights']=='admin'): ?>
                     <li role="presentation" <?php echo in_array($page, ['categories', 'category', 'delete']) ? 'class="active"' : ''; ?>><a href="<?php echo ADMIN_URL; ?>?page=categories">Kategooriad</a></li>
+                    <?php endif; ?>
                     <li role="presentation" <?php echo in_array($page, ['products', 'product', 'pictures']) ? 'class="active"' : ''; ?>><a href="<?php echo ADMIN_URL; ?>?page=products">Tooted</a></li>
                 </ul>
             </div>

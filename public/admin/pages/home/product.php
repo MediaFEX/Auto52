@@ -31,6 +31,9 @@ if(!empty($translates)) {
 } 
 
 ?> 
+
+<link href="http://ubuntu.ametikool.ee/~TAK15_Jakobson/BackupAuto52/public/template/css/style.css" rel="stylesheet">
+
 <h3 class="page-header text-right"><?php echo $pages[$page]['name'] ?></h3> 
 
 <h1 class="page-header"><?php echo ProductLanguage::translate('name', $product, $translations) ?> <small><?php echo ProductLanguage::translate('price', $product, $translations) ?>€</small></h1> 
@@ -49,14 +52,26 @@ echo '<ul>';
     <li><?php echo User::find_by_ID($product->added_by)->username; ?></li> 
 </ul> 
 
-<?php if (!empty($pictures)) : foreach ($pictures as $key => $pic) : ?> 
-    <?php echo $key % 3 == 0 ? '<div class="clearfix"></div><br>' : '' ?> 
-    <div class="col-xs-4"> 
-        <img src="<?php echo makePictureLink($pic) . DS . PICTURE_MED . DS . $pic->name; ?>" class="img-responsive"> 
-    </div> 
-<?php endforeach; endif; ?> 
+<div class="container">
+    <h1 class="my-4 text-center text-lg-left">Gallery</h1>
+    <div  class="row text-center text-lg-left"> </div>
 
 
+        <?php if (!empty($pictures)) : foreach ($pictures as $key => $pic) : ?> 
+                <?php
+                    if($key==0){
+                        echo '<img src="'.makePictureLink($pic) . $pic->name.'" class="img-thumbnail"> ';
+                    }else{
+                        echo '<div class="col-lg-2 col-md-4 col-xs-6">';
+                            echo '<img src="'.makePictureLink($pic) . DS . PICTURE_THUMB . DS . $pic->name.'" class="img-fluid img-thumbnail fixedSize">';
+                        echo '</div>';
+                    }
+                ?>
+        <?php endforeach; endif; ?> 
+
+
+    </div>
+</div>
 
 
 <?php /*
@@ -73,5 +88,26 @@ echo '<ul>';
         <img src="<?php echo makePictureLink($pic) . DS . PICTURE_THUMB . DS . $pic->name; ?>" class="img-responsive"> 
     </div> 
 <?php endforeach; endif; ?> 
+
+
+
+
+
+
+if (!empty($pictures)) : foreach ($pictures as $key => $pic) : ?> 
+    <?php echo $key % 3 == 0 ? '<div class="clearfix"></div><br>' : '' ?> 
+    <div class="col-xs-4"> 
+        <img src="<?php echo makePictureLink($pic) . DS . PICTURE_MED . DS . $pic->name; ?>" class="img-responsive"> 
+    </div> 
+<?php endforeach; endif;
+
+<?php if (!empty($pictures)) : foreach ($pictures as $key => $pic) : ?> 
+    <?php echo $key % 3 == 0 ? '<div class="clearfix"></div><br>' : '' ?>
+    <?php $key == 0 ? $picture=PICTURE_FULL : $picture=PICTURE_THUMB ?>
+    <div class="col-xs-4"> 
+        <img src="<?php echo makePictureLink($pic) . DS . $picture . DS . $pic->name; ?>" class="img-responsive"> 
+    </div> 
+<?php endforeach; endif; ?> 
+
 
 */

@@ -67,14 +67,7 @@ defined('TEMPLATE_URL_JS') ? null : define('TEMPLATE_URL_JS', MAIN_URL . 'templa
 require_once INCLUDE_PATH . 'class.MySQLDatabase.php';
 require_once INCLUDE_PATH . 'class.DatabaseQuery.php';
 require_once INCLUDE_PATH . 'class.Session.php';
-require_once INCLUDE_PATH . 'class.Category.php';
-require_once INCLUDE_PATH . 'class.Product.php';
-require_once INCLUDE_PATH . 'functions.php';
-require_once INCLUDE_PATH . 'class.User.php';
-require_once INCLUDE_PATH . 'pages.php';
-require_once INCLUDE_PATH . 'class.Picture.php';
 require_once INCLUDE_PATH . 'class.ProductLanguage.php';
-
 defined('DEFAULT_LANG') ? null : define('DEFAULT_LANG', 'et'); 
 
 //LANGUAGES 
@@ -92,6 +85,14 @@ if(file_exists($langFile)) {
 } 
 
 $languagesInPage = ['en'];
+require_once INCLUDE_PATH . 'class.Category.php';
+require_once INCLUDE_PATH . 'class.Product.php';
+require_once INCLUDE_PATH . 'functions.php';
+require_once INCLUDE_PATH . 'class.User.php';
+require_once INCLUDE_PATH . 'pages.php';
+require_once INCLUDE_PATH . 'class.Picture.php';
+require_once INCLUDE_PATH . 'class.EmailConfirm.php';
+
 
 //Added constants 
 defined('MAX_PASS_LENGTH') ? null : define('MAX_PASS_LENGTH', 3); 

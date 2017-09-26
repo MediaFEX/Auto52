@@ -61,7 +61,21 @@ class Product extends DatabaseQuery
         $results = self::find_by_query($query); 
 
         return empty($results) ? false : $results; 
-    } 
+    }
+    public static function find_by_user_product_name($s = "", $ID) { 
+        global $database; 
+
+        if(empty($s)) { 
+            return false; 
+        } 
+
+        $query = "SELECT * FROM " . PX . self::$table_name 
+            . " WHERE name LIKE '%" . $database->escape_value($s) . "%' && added_by=".$ID;
+
+        $results = self::find_by_query($query);
+
+        return empty($results) ? false : $results;
+    }
 
     public static function find_by_category($categories = null) { 
         global $database; 
@@ -81,11 +95,26 @@ class Product extends DatabaseQuery
     public function showPrice() { 
         return $this->price . "€"; 
     }
+
     public static function findAll($start, $max) {
         global $database;
 
         $sql = "SELECT * FROM "
             . PX . self::$table_name . " LIMIT " . $database->escape_value($start) . ", " . $database->escape_value($max);
+
+        //echo $sql;
+
+        $result = self::find_by_query($sql);
+
+
+        return !empty($result) ? $result : false;
+    }
+
+    public static function find_user_all($start, $max, $ID) {
+        global $database;
+
+        $sql = "SELECT * FROM "
+            . PX . self::$table_name . " WHERE added_by=".$ID." LIMIT " . $database->escape_value($start) . ", " . $database->escape_value($max);
 
         //echo $sql;
 
