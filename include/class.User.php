@@ -32,7 +32,7 @@ class User extends DatabaseQuery
     public $rights;
     public $added;
     public $status;
-
+    //Gets the current user that's logged in
     public static function getUserByName($username) {
         global $database;
 
@@ -43,7 +43,7 @@ class User extends DatabaseQuery
 
         return empty($user) ? false : array_shift($user);
     }
-
+    //Controls if he can log in
     public static function auth($username, $password) {
 
         $user = User::getUserByName($username);
@@ -62,7 +62,7 @@ class User extends DatabaseQuery
 
         return false;
     }
-
+    //Checks if the user can access the current page
     public static function checkRights($user_id, $page) {
         if(empty($user_id)) {
             return false;
@@ -80,6 +80,7 @@ class User extends DatabaseQuery
 
         return false;
     }
+    //Finds all from database with set intervals (0 to 5, 6 to 10, etc)
     public static function findAll($start, $max)
     {
         global $database;

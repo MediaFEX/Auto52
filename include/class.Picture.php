@@ -25,7 +25,7 @@ class Picture extends DatabaseQuery
     public $added; 
     public $edited_by; 
     public $status; 
-
+    //Makes thumbnail without making it too stretched
     public function make_thumb($src, $dest, $newWidth) { 
         $sourceImage = $this->image_create_from_any($src); 
 
@@ -43,6 +43,7 @@ class Picture extends DatabaseQuery
         /* create the physical thumbnail image to its destination */ 
         imagejpeg($virtualImage, $dest); 
     }
+    //Only allows specific file types and creates filepaths for them.
     public function image_create_from_any($filepath) { 
         $type = exif_imagetype($filepath); // [] if you don't have exif you could use getImageSize() 
         $allowedTypes = array( 
@@ -70,7 +71,7 @@ class Picture extends DatabaseQuery
         } 
         return $im; 
     } 
-
+    //Makes folders that anyone ncan access and CRUD when needed
     public function makePictureFolders() { 
         if(!file_exists(UPLOAD_PATH)) { 
             mkdir(UPLOAD_PATH, 0777); 
@@ -96,7 +97,7 @@ class Picture extends DatabaseQuery
             mkdir(UPLOAD_PATH_FULL . $this->product_id . DS . PICTURE_THUMB, 0777); 
         } 
     } 
-
+    //Resizes pictures while keeping dimensions and makes folders for them.
     public function resizePicture() { 
         $this->makePictureFolders(); 
 
@@ -109,7 +110,7 @@ class Picture extends DatabaseQuery
         $this->make_thumb(UPLOAD_PATH_FULL . $this->product_id . DS . $this->name, 
             UPLOAD_PATH_FULL . $this->product_id . DS . $this->name, PICTURE_FULL); 
     } 
-
+    //Finds picture
     public static function getPictures($src) { 
         $pictures = scandir($src); 
 
@@ -118,7 +119,7 @@ class Picture extends DatabaseQuery
 
         return $pictures; 
     } 
-
+    //Gets picture that's connected to the current product
     public static function getPicturesByProduct($ID) { 
         global $database; 
 
@@ -133,7 +134,7 @@ class Picture extends DatabaseQuery
 
         return empty($results) ? false : $results; 
     } 
-
+    //Looks for a really specific picture
     public static function getPictureByNameAndProduct($name, $ID) { 
         global $database; 
 
@@ -148,6 +149,7 @@ class Picture extends DatabaseQuery
 
         return empty($results) ? false : array_shift($results); 
     }
+    //Gets picture count that a singe product has to help limit the maximum amount of pictures
     public static function getPictureCount($ID) {
         global $database;
 
@@ -160,9 +162,6 @@ class Picture extends DatabaseQuery
 
         $result = $database->query($sql);
         $row = $database->fetch_array($result);
-        echo '<pre>';
-        print_r($row);
-        echo '</pre>';
         return array_shift($row);
     }
 

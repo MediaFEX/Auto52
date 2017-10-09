@@ -6,32 +6,32 @@
 
 var admin_url = "http://ubuntu.ametikool.ee/~TAK15_Jakobson/BackupAuto52/public/admin/";
 
-$(".delete-confirm").click(function () { 
-    var title = "Are you sure?"; 
-    var text = "You will not be able to recover this."; 
-    var confirmButtonText = "Yes, delete it!"; 
+$(".delete-confirm").click(function () {
+    var title = "Are you sure?";
+    var text = "You will not be able to recover this.";
+    var confirmButtonText = "Yes, delete it!";
 
-    var heading_1 = "Deleted"; 
-    var confirm_text = "Your imaginary file has been deleted."; 
+    var heading_1 = "Deleted";
+    var confirm_text = "Your imaginary file has been deleted.";
 
-    var ID = $(this).data("delete-id"); 
-    var url = $(this).data("url"); 
+    var ID = $(this).data("delete-id");
+    var url = $(this).data("url");
 
-    var closestTr = $(this).closest("tr"); 
+    var closestTr = $(this).closest("tr");
 
-    swal({ 
-        title: title, 
-        text: text, 
-        type: "warning", 
-        showCancelButton: true, 
-        confirmButtonColor: "#DD6B55", 
-        confirmButtonText: confirmButtonText, 
-        closeOnConfirm: false 
-    }, 
-    function(){ 
-        $.ajax({ 
-            method: "POST", 
-            url: admin_url + url + ".php?ID=" + ID 
+    swal({
+        title: title,
+        text: text,
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: confirmButtonText,
+        closeOnConfirm: false
+    },
+    function(){
+        $.ajax({
+            method: "POST",
+            url: admin_url + url + ".php?ID=" + ID
         }) 
         .done(function( data ) { 
             if(data == '') { 
@@ -41,9 +41,9 @@ $(".delete-confirm").click(function () {
                 swal("ERROR", data, "error"); 
             } 
 
-        }); 
-    }); 
-}); 
+        });
+    });
+});
 
 
 

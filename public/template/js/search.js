@@ -23,7 +23,7 @@ function searchProduct(s) {
     $.ajax({ 
         method: "POST", 
         data: {s: s}, 
-        url: admin_url + "pages/product/search.php" 
+        url: admin_url + "pages/product/search.php"
     }) 
     .done(function( data ) { 
         $("#product-content").html(data);

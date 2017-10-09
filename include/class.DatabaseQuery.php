@@ -9,7 +9,7 @@
 class DatabaseQuery
 {
     protected static $table_name;
-
+    //Looks for all with a limit of 1000
     public static function find_all() {
         $sql = "SELECT * FROM "
             . PX . static::$table_name . " LIMIT 1000";
@@ -18,7 +18,7 @@ class DatabaseQuery
 
         return !empty($result) ? $result : false;
     }
-
+    //Counts everything it finds.
     public static function count_all() {
         global $database;
         $sql = "SELECT COUNT(*) FROM "
@@ -28,6 +28,7 @@ class DatabaseQuery
         $row = $database->fetch_array($result);
         return array_shift($row);
     }
+    //Counts everything with a specific thing
     public static function count_allWhere($where) {
         global $database;
         $sql = "SELECT COUNT(*) FROM "
@@ -38,7 +39,7 @@ class DatabaseQuery
         return array_shift($row);
     }
 
-
+    //Finds things by their ID
     public static function find_by_ID($ID = 0) {
         global $database;
 
@@ -50,6 +51,7 @@ class DatabaseQuery
 
         return !empty($result) ? array_shift($result) : false;
     }
+    //Finds things by ID and turns them into objects
     public static function find_by_ID2($ID = 0) {
         global $database;
 
@@ -61,6 +63,7 @@ class DatabaseQuery
 
         return !empty($result) ? $result : false;
     }
+    //Finds something with a pre written query
     public static function find_by_query($query = '') {
         global $database;
 
@@ -73,7 +76,7 @@ class DatabaseQuery
 
         return $object;
     }
-
+    //Gets the current rows class data
     private static function get_class_data($row) {
         $class_name = get_called_class();
         $object = new $class_name;
@@ -86,12 +89,12 @@ class DatabaseQuery
 
         return $object;
     }
-
+    //Searches array for row name
     private function has_row_name($row_name) {
         $row_names_from_class = $this->table_row_names();
         return array_key_exists($row_name, $row_names_from_class);
     }
-
+    //Searches database for table row names
     protected function table_row_names() {
         $table_row_names = [];
         foreach (static::$db_fields as $field) {
@@ -102,7 +105,7 @@ class DatabaseQuery
 
         return $table_row_names;
     }
-
+    //Finds the table row values
     protected function check_table_rows() {
         global $database;
 
@@ -114,12 +117,12 @@ class DatabaseQuery
 
         return $clean_table_rows;
     }
-
+    //If it currently exists rewrite the data otherwise create it.
     public function save() {
         //check has Object ID
         return isset($this->ID) ? $this->update() : $this->create();
     }
-
+    //Create new value
     protected function create() {
         global $database;
 
@@ -146,7 +149,7 @@ class DatabaseQuery
 
         return FALSE;
     }
-
+    //Update current value
     protected function update() {
         global $database;
         $fields = $this->check_table_rows();
@@ -165,7 +168,7 @@ class DatabaseQuery
         return $database->check_last_query() == 1 ? true : false;
 
     }
-
+    //Delete current value
     public function delete() {
         global $database;
 

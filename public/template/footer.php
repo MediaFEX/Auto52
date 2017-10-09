@@ -13,6 +13,7 @@
 <!--<script src="<?php echo TEMPLATE_URL; ?>plugins/search/js/ajaxlivesearch.min.js"></script> -->
 <!--<script src="--><?php //echo TEMPLATE_URL; ?><!--js/masonry.pkgd.min.js"></script>-->
 <script src="<?php echo TEMPLATE_URL; ?>js/salvattore.min.js"></script>
+<script src="<?php echo INCLUDE_PATH; ?>sweetalert.php"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="<?php echo TEMPLATE_URL_JS; ?>bootstrap.min.js"></script>
 <script src="<?php echo TEMPLATE_URL; ?>plugins/chosen/chosen.jquery.js"></script>

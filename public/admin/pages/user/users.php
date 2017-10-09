@@ -11,21 +11,24 @@ if(!defined('MAIN_PATH')) {
 }
 
 $ID = filter_input(INPUT_GET, 'ID', FILTER_VALIDATE_INT);
-if(!empty($ID)) {
-    $category = User::find_by_ID($ID);
 
-    if(empty($category)) {
-        $session->message('<div class="alert alert-danger">Kategooria puudub</div>');
-        reDirectTo(ADMIN_URL . '?page=users');
-    }
-}
+
+
+$category=invalidAccess($ID, $session, array('admin'), 'User', 'user', 'ID');
 
 $btn = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING);
-$status = filter_input(INPUT_POST, 'status', FILTER_VALIDATE_INT);
 $email = filter_input(INPUT_POST, 'name', FILTER_VALIDATE_EMAIL);
 $pass = filter_input(INPUT_POST, 'pass', FILTER_SANITIZE_STRING);
-$rights = filter_input(INPUT_POST, 'rights', FILTER_SANITIZE_STRING);
-$lang = filter_input(INPUT_POST, 'lang', FILTER_SANITIZE_STRING);
+
+if($_SESSION['rights']=='admin'){
+    $status = filter_input(INPUT_POST, 'status', FILTER_VALIDATE_INT);
+    $rights = filter_input(INPUT_POST, 'rights', FILTER_SANITIZE_STRING);
+    $lang = filter_input(INPUT_POST, 'lang', FILTER_SANITIZE_STRING);
+}else{
+    $status=$category->status;
+    $rights=$category->rights;
+    $lang=$category->lang;
+}
 
 if(isset($btn)) {
     $errors = [];
@@ -34,6 +37,9 @@ if(isset($btn)) {
         $errors['name'] = "Email ei tohi olla tühi";
     } elseif (strlen($email) > 100) {
         $errors['name'] = "Email ei tohi olla pikem kui 100 ühikut";
+    }
+    if(empty($ID)&&empty($pass)){//Checks if you're creating a new account, if yes then password cannot be empty.
+        $errors['pass'] = 'When creating a new account, password cannot be empty.';//If password is empty then give an error.
     }
 
     if(empty($errors)) {
@@ -59,11 +65,11 @@ if(isset($btn)) {
             } else {
                 $session->message('<div class="alert alert-success">Kategoori uuendati</div>');
             }
-            reDirectTo(ADMIN_URL . '?page=users');
+            reDirectTo(ADMIN_URL . '?page=user');
         }
 
         $session->message('<div class="alert alert-warning">Kategooriat ei lisatud baasi</div>');
-        reDirectTo(ADMIN_URL . '?page=users');
+        reDirectTo(ADMIN_URL . '?page=user');
 
     }
 }
@@ -71,8 +77,6 @@ if(isset($btn)) {
 $statusArr=[0,1];
 $rightsArr=['user','moderator','admin'];
 $languagesArr=['et','en'];
-
-print_r($status);
 
 
 
@@ -97,15 +101,13 @@ if($_SESSION['rights']=='admin'){
     createSelect($statusArr, $category, 'status', 'Status', '');
 
     createSelect($rightsArr, $category, 'rights', 'Rights', '');
-
-    createSelect($languagesArr, $category, 'lang', 'Language', '');
 }else{
     createSelect($statusArr, $category, 'status', 'Status', 'disabled');
 
     createSelect($rightsArr, $category, 'rights', 'Rights', 'disabled');
 
-    createSelect($languagesArr, $category, 'lang', 'Language', 'disabled');
 }
+createSelect($languagesArr, $category, 'lang', 'Language', '');
 ?>
 
 

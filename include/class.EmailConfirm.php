@@ -22,7 +22,7 @@ class EmailConfirm extends DatabaseQuery
     public $password; 
     public $hash; 
     public $added; 
-
+    //Generates hash for emails
     public static function getHash($length = 10) { 
 
         do { 
@@ -32,7 +32,7 @@ class EmailConfirm extends DatabaseQuery
         return $hash; 
 
     } 
-
+    //Looks through database with a specific hash
     public static function find_by_hash($hash = '') { 
         global $database; 
 

@@ -54,7 +54,7 @@ $create_categories = "CREATE TABLE `TAK15_Jakobson`.`TACOLA_categories`(
   `status` INT(1) NOT NULL 
 ) ENGINE = InnoDB;"; 
 
-$create_products = "CREATE TABLE `TAK15_Jakobson`.`TACOLA_products`( 
+$create_en_products = "CREATE TABLE `TAK15_Jakobson`.`TACOLA_products`( 
   `ID` SERIAL, 
   `name` VARCHAR(100) NOT NULL, 
   `price` DECIMAL(6, 2) NOT NULL, 
@@ -79,14 +79,27 @@ $create_pictures = "CREATE TABLE `TAK15_Jakobson`.`TACOLA_pictures`(
 ) ENGINE = InnoDB;"; 
 
 $create_product_lang = "CREATE TABLE `TAK15_Jakobson`.`TACOLA_products_lang`( 
-  `ID` SERIAL, 
-  `product_id` INT NOT NULL, 
-  `tabel_column` VARCHAR(255) NOT NULL, 
-  `column_value` TEXT NOT NULL, 
-  `language` VARCHAR(2) NOT NULL, 
-  `added` DATETIME NOT NULL, 
-  `added_by` INT NOT NULL, 
-  `edited` DATETIME ON UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
-  `edited_by` INT NOT NULL, 
-  `status` INT NOT NULL 
+  `ID` SERIAL,
+  `product_id` INT NOT NULL,
+  `tabel_column` VARCHAR(255) NOT NULL,
+  `column_value` TEXT NOT NULL,
+  `language` VARCHAR(2) NOT NULL,
+  `added` DATETIME NOT NULL,
+  `added_by` INT NOT NULL,
+  `edited` DATETIME ON UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `edited_by` INT NOT NULL,
+  `status` INT NOT NULL
+) ENGINE = InnoDB;";
+
+$create_et_products = "CREATE TABLE `TAK15_Jakobson`.`TACOLA_et_products` (
+`ID` SERIAL NOT NULL,
+`name` VARCHAR(100) NOT NULL,
+`price` DECIMAL(10,2) NOT NULL,
+`description` TEXT NOT NULL,
+`category_id` VARCHAR(50) NOT NULL,
+`main_picture` VARCHAR(100) NOT NULL,
+`added` DATETIME NOT NULL,
+`added_by` INT(11) NOT NULL,
+`edited_by` INT(11) NOT NULL,
+`status` INT(11) NOT NULL
 ) ENGINE = InnoDB;";

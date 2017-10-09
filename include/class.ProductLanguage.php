@@ -60,13 +60,11 @@ class ProductLanguage extends DatabaseQuery
     public static function translate($field, $product, $translations) { 
 
         if(LANG == DEFAULT_LANG) { 
-            return $product->$field; 
-        } 
-
-        if (isset($translations->$field)) { 
             return $translations->$field; 
         } 
-
+        if(isset($translations->$field)) {
+            return $product->$field; 
+        } 
         return "[" . $product->$field . "]"; 
     } 
 

@@ -10,20 +10,23 @@ class Category extends DatabaseQuery
     public static $table_name = 'categories'; 
     public static $db_fields = [ 
         'ID', //> SERIAL 
-        'name', //> VARCHAR 100 
-        'parent', //> INT 
-        'added', //> DATETIME 
-        'status', //> INT 1 
+        'et_name', //> VARCHAR 100
+        'en_name',   //> VARCHAR 100
+        'parent', //> INT
+        'added', //> DATETIME
+        'status', //> INT 1
     ]; 
 
     public $ID; 
-    public $name; 
-    public $parent; 
+    public $et_name;
+    public $en_name;
+    public $parent;
     public $added; 
-    public $status; 
+    public $status;
 
 
 
+//              Looks for name through the category database
     public static function find_by_name($s = "") { 
         global $database; 
 
@@ -37,8 +40,8 @@ class Category extends DatabaseQuery
         $results = self::find_by_query($query); 
 
         return empty($results) ? false : $results; 
-    } 
-    
+    }
+//              Looks for category product
     public static function find_parent($ID) { 
         global $database; 
 
@@ -49,8 +52,8 @@ class Category extends DatabaseQuery
         $result = static::find_by_query($sql); 
 
         return !empty($result) ? array_shift($result) : false; 
-    } 
-
+    }
+//              Looks for all through category with a start to end (0 to 5, 6 to 10 etc)
     public static function findAll($start, $max) { 
         global $database; 
 
@@ -63,6 +66,7 @@ class Category extends DatabaseQuery
 
         return !empty($result) ? $result : false; 
     }
+//              Looks through the category database and searches for categories without parents
     public static function findAllWithNoParent(){ 
         $sql = "SELECT * FROM "
             . PX . static::$table_name . " WHERE parent=0 LIMIT 1000";

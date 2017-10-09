@@ -38,9 +38,6 @@ defined('ADMIN_PAGES_URL') ? null : define('ADMIN_PAGES_URL', ROOT_URL . 'public
 defined('ADMIN_PAGES_PATH') ? null : define('ADMIN_PAGES_PATH', ROOT_PATH . 'public' . DS . 'admin' . DS . 'pages' . DS); 
 defined('ADMIN_404') ? null : define('ADMIN_404', ADMIN_PAGES_PATH . '404.php'); 
 
-//defined('ADMIN_URL') ? null : define('ADMIN_URL', MAIN_URL . 'admin/'); 
-//defined('ADMIN_PATH') ? null : define('ADMIN_PATH', MAIN_PATH . 'admin' . DS); 
-
 //PICTURE 
 defined('PICTURE_THUMB') ? null : define('PICTURE_THUMB', 200); 
 defined('PICTURE_MED') ? null : define('PICTURE_MED', 700); 
@@ -67,24 +64,30 @@ defined('TEMPLATE_URL_JS') ? null : define('TEMPLATE_URL_JS', MAIN_URL . 'templa
 require_once INCLUDE_PATH . 'class.MySQLDatabase.php';
 require_once INCLUDE_PATH . 'class.DatabaseQuery.php';
 require_once INCLUDE_PATH . 'class.Session.php';
-require_once INCLUDE_PATH . 'class.ProductLanguage.php';
-defined('DEFAULT_LANG') ? null : define('DEFAULT_LANG', 'et'); 
 
-//LANGUAGES 
-if(isset($_SESSION['lang'])) { 
-    $lang = $_SESSION['lang']; 
-} else { 
-    $lang = DEFAULT_LANG; 
-} 
-defined('LANG') ? null : define('LANG', $lang); 
-$langFile = INCLUDE_PATH . "languages" . DS . LANG . '.php'; 
-if(file_exists($langFile)) { 
-    require_once $langFile; 
-} else { 
-    require_once INCLUDE_PATH . "languages" . DS . DEFAULT_LANG . '.php'; 
-} 
+defined('DEFAULT_LANG') ? null : define('DEFAULT_LANG', 'en');
+
+//LANGUAGES
+if(isset($_SESSION['lang'])) {
+    $lang = $_SESSION['lang'];
+} else {
+    $lang = DEFAULT_LANG;
+}
+defined('LANG') ? null : define('LANG', $lang);
+$langFile = INCLUDE_PATH . "languages" . DS . LANG . '.php';
+if(file_exists($langFile)) {
+    require_once $langFile;
+} else {
+    require_once INCLUDE_PATH . "languages" . DS . DEFAULT_LANG . '.php';
+}
 
 $languagesInPage = ['en'];
+if(LANG=='et'){
+    $categoryLang='et_name';
+}else{
+    $categoryLang='en_name';
+}
+require_once INCLUDE_PATH . 'class.ProductLanguage.php';
 require_once INCLUDE_PATH . 'class.Category.php';
 require_once INCLUDE_PATH . 'class.Product.php';
 require_once INCLUDE_PATH . 'functions.php';

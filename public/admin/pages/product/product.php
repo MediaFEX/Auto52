@@ -5,39 +5,62 @@
  * Date: 9.03.2017
  * Time: 14:39
  */
+
 if(!defined('MAIN_PATH')) {
     header("Location: /");
     exit();
 }
-
+// id
 $ID = filter_input(INPUT_GET, 'ID', FILTER_VALIDATE_INT);
-if(!empty($ID)) {
+
+$product=invalidAccess($ID, $session, array('admin', 'moderator'), 'product', 'products', 'added_by');
+
+// if(!empty($ID)) {//If not empty, find by ID
+//     $product = Product::find_by_ID($ID);
+
+//     if(empty($product)) {//If product is missing, redirect
+//         $session->message('<div class="alert alert-danger">Toode puudub</div>');
+//         reDirectTo(ADMIN_URL . '?page=products');
+//     }
+// }
+// Variables
+$btn = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING);
+$status = filter_input(INPUT_POST, 'status', FILTER_SANITIZE_STRING);
+
+
+if(!defined('MAIN_PATH')) {
+    header("Location: /");
+    exit();
+}
+// id
+$ID = filter_input(INPUT_GET, 'ID', FILTER_VALIDATE_INT);
+if(!empty($ID)) {//If not empty, find by ID
     $product = Product::find_by_ID($ID);
 
-    if(empty($product)) {
+    if(empty($product)) {//If product is missing, redirect
         $session->message('<div class="alert alert-danger">Toode puudub</div>');
         reDirectTo(ADMIN_URL . '?page=products');
     }
 }
-
+// Variables
 $btn = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING);
 $status = filter_input(INPUT_POST, 'status', FILTER_SANITIZE_STRING);
 
-if(isset($btn)) {
-    $errors = [];
-
+if(isset($btn)) { //if button is pressed
+    $errors = [];//Declare array
+    //Get information
     $names = filterArray($_POST['name'], FILTER_SANITIZE_STRING);
-    $prices = filterArray($_POST['price'], FILTER_VALIDATE_FLOAT);
+    $price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_INT); 
     $descriptions = filterArray($_POST['description'], FILTER_SANITIZE_STRING);
     $parent = filterArray($_POST['parent'], FILTER_SANITIZE_STRING);
 
-    if(empty($names['et'])) {
+    if(empty($names['et'])||empty($names['en'])) {
         $errors['name'] = "Nimi ei tohi olla tühi";
-    } elseif (strlen($names['et']) > 100) {
+    } elseif (strlen($names['et']) > 100||strlen($names['en'])>100) {
         $errors['name'] = "Nimi ei tohi olla pikem kui 100 ühikut";
     }
 
-    if(empty($prices['et'])) {
+    if(empty($price)) {
         $errors['price'] = "Hind ei tohi tühi olla";
     }
 
@@ -52,7 +75,7 @@ if(isset($btn)) {
         }
 
         $product->name = $names['et'];
-        $product->price = $prices['et'];
+        $product->price = $price;
         $product->added = date("Y-m-d H:i:s");
 
         foreach ($parent as $key => $value) {
@@ -84,25 +107,6 @@ if(isset($btn)) {
 
                 $pLang->product_id = $product_id;
                 $pLang->table_column = 'name';
-                $pLang->column_value = $name;
-                $pLang->language = $lang;
-                $pLang->added = date("Y-m-d H:i:s");
-                $pLang->added_by = $_SESSION['user_id'];
-                $pLang->edited_by = $_SESSION['user_id'];
-                $pLang->status = 1;
-
-                $pLang->save();
-            }
-
-            foreach ($prices as $lang => $name) {
-                $pLang = ProductLanguage::findByColumnLangProduct('price', $lang, $product_id);
-
-                if(empty($pLang)) {
-                    $pLang = new ProductLanguage();
-                }
-
-                $pLang->product_id = $product_id;
-                $pLang->table_column = 'price';
                 $pLang->column_value = $name;
                 $pLang->language = $lang;
                 $pLang->added = date("Y-m-d H:i:s");
@@ -170,22 +174,17 @@ if(isset($btn)) {
                 <input value="<?php echo isset($product->name) ? $product->name : ''; ?>" name="name[et]" type="text" class="form-control" id="name" placeholder="Lisage nimi">
             </div>
             <div class="form-group">
-                <label for="name"><?php echo translate('product_price'); ?></label>
-                <input value="<?php echo isset($product->price) ? $product->price : ''; ?>" name="price[et]" type="text" class="form-control" id="price" placeholder="Lisage Hind">
-            </div>
-            <div class="form-group">
                 <label for="description"><?php echo translate('product_description'); ?></label>
                 <textarea name="description[et]" class="form-control" id="description"><?php echo isset($product->description) ? $product->description : ''; ?></textarea>
             </div>
         </div>
         <?php
 
-        if(!isset($product)) {
+        if(isset($product)) {
             $product_id = 0;
         } else {
             $product_id = $product->ID;
         }
-
         if(!empty($languagesInPage)) : foreach ($languagesInPage as $item) :
 
             $translates = ProductLanguage::findByProductId($product_id, $item);
@@ -200,10 +199,7 @@ if(isset($btn)) {
                     <label for="name"><?php echo translate('product_name', $item); ?></label>
                     <input value="<?php echo isset($translations->name) ? $translations->name : ''; ?>" name="name[<?php echo $item; ?>]" type="text" class="form-control" id="name" placeholder="Lisage nimi">
                 </div>
-                <div class="form-group">
-                    <label for="name"><?php echo translate('product_price', $item); ?></label>
-                    <input value="<?php echo isset($translations->price) ? $translations->price : ''; ?>" name="price[<?php echo $item; ?>]" type="text" class="form-control" id="price" placeholder="Lisage Hind">
-                </div>
+
                 <div class="form-group">
                     <label for="description"><?php echo translate('product_description', $item); ?></label>
                     <textarea name="description[<?php echo $item; ?>]" class="form-control" id="description"><?php echo isset($translations->description) ? $translations->description : ''; ?></textarea>
@@ -211,6 +207,10 @@ if(isset($btn)) {
             </div>
         <?php endforeach; endif;
         ?>
+    </div>
+    <div class="form-group">
+        <label for="name"><?php echo translate('product_price', $item); ?></label>
+        <input value="<?php echo isset($product->price) ? $product->price : ''; ?>" name="price" type="number" class="form-control" id="price" placeholder="Lisage Hind">
     </div>
     <h4><?php echo translate('product_categories'); ?></h4>
     <?php $categories = Category::find_all(); ?>
@@ -226,16 +226,17 @@ if(isset($btn)) {
         }
     } endif;
     ?>
+
     <?php if(!empty($categoryMain)) : foreach ($categoryMain as $main) : ?>
         <div class="form-group">
-            <label for="parent"><?php echo $main->name; ?></label>
+            <label for="parent"><?php echo $main->$categoryLang; ?></label>
             <select name="parent[]" class="form-control chosen-select">
                 <option value="0">Valige</option>
                 <?php if(!empty($categorySub[$main->ID])) : foreach ($categorySub[$main->ID] as $sub) : ?>
                     <?php if($ID != $sub->ID) : ?>
                         <option value="<?php echo $sub->ID; ?>"
                             <?php //echo isset($product->category_id) && $product->category_id == $sub->ID ? 'selected' : '' ?>
-                        ><?php echo $sub->name; ?></option>
+                        ><?php echo $sub->$categoryLang; ?></option>
                     <?php endif; ?>
                 <?php endforeach; endif; ?>
             </select>

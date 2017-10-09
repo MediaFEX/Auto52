@@ -53,19 +53,6 @@ if($_SESSION['rights']=='admin'||$_SESSION['rights']=='moderator'){
 }
 $pagesCount = ceil( $countCategories / MAX_CATEGORIES);
 
-?>
-    <ul class="pager">
-        <?php if(!empty($pageNr)) : ?>
-            <?php if($pageNr == 1) : ?>
-                <li><a id="previous" value="<?php echo $previous; ?>" href="<?php echo ADMIN_URL . "?page=products"; ?>"><?php echo translate("previous_btn") ?></a></li>
-            <?php else: ?>
-                <li><a id="previous" value="<?php echo $previous; ?>" href="<?php echo ADMIN_URL . "?page=products&pageNr=" . $previous; ?>"><?php echo translate("previous_btn") ?></a></li>
-            <?php endif; ?>
-        <?php endif; ?>
-        <?php if($pagesCount-1 > $pageNr ) : ?>
-            <?php /*<li><a id="next" value="<?php echo $next; ?>" href="<?php echo ADMIN_URL . "?page=products&pageNr=" . $next; ?>"><?php echo translate("next_btn") ?></a></li> */?>
-            <li><a id="next" value="<?php echo $next; ?>" href="<?php echo ADMIN_URL . "?page=products&pageNr=" . $next; ?>" ><?php echo translate("next_btn") ?></a></li>
-        <?php endif; ?>
-    </ul>
+pager($pageNr, $pagesCount, $next, $previous, 'products'); //Calls for next page and previous?>
 
 <script src="<?php echo TEMPLATE_URL; ?>js/custom.js"></script>

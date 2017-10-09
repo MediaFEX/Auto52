@@ -9,7 +9,6 @@ if(!defined('MAIN_PATH')) {
     header("Location: /");
     exit();
 }
-echo $_SESSION['rights'];
 $pageNr = filter_input(INPUT_GET, 'pageNr', FILTER_VALIDATE_INT);
 $next = $pageNr+1;
 $previous = $pageNr-1;
@@ -19,7 +18,6 @@ if(empty($pageNr)) {
 } else {
     $pageNrInDb = $pageNr * MAX_CATEGORIES;
 }
-
 if($_SESSION['rights']==='admin'){
     $categories = User::findAll($pageNrInDb, MAX_CATEGORIES);
     $countCategories = User::count_all();
@@ -28,19 +26,24 @@ if($_SESSION['rights']==='admin'){
     $categories = User::find_by_ID2($_SESSION['user_id']);
 }
 
-
-
-
 ?>
     <div class="row">
         <div class="col-sm-8">
-            <h3><a href="<?php echo ADMIN_URL . "?page=users"; ?>"><span class="glyphicon glyphicon-plus-sign"></span> Lisa</a></h3>
+            <?php if($_SESSION['rights']=='admin'): ?>
+                <h3><a href="<?php echo ADMIN_URL . "?page=users"; ?>"><span class="glyphicon glyphicon-plus-sign"></span> Lisa</a></h3>
+            <?php endif; ?>
         </div>
         <div class="col-sm-4">
             <h3 class="text-right"><?php echo $pages[$page]['name'] ?></h3>
         </div>
     </div>
-<?php // echo isset($session->message) ? $session->message : '' ?>
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <?php echo isset($session->message) ? $session->message : '' ?>
+        </div>
+    </div>
 
 <?php if (!empty($categories)) : ?>
     <table class="table">
@@ -69,9 +72,11 @@ if($_SESSION['rights']==='admin'){
                     </a>
                 </td>
                 <td>
-                    <a href="<?php echo ADMIN_URL . "?page=delete-user&ID=" . $cat->ID; ?>">
-                        <span class="glyphicon glyphicon-trash"></span>
-                    </a>
+                <span
+                        data-url="pages/user/delete-user"
+                        data-delete-id="<?php echo $cat->ID; ?>"
+                        class="glyphicon glyphicon-trash bg-danger delete-confirm"
+                        style="cursor: pointer;"></span>
                 </td>
             </tr>
         <?php endforeach; ?>

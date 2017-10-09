@@ -58,15 +58,20 @@ if($_SESSION['rights']=='admin'||$_SESSION['rights']=='moderator'){
             <td><?php echo $product->added ?></td>
             <td> 
                 <?php
-                    $category_name = Category::find_by_ID2($product->category_id);
-                    $id_name=explode(',', $product->category_id);
-                    foreach ($id_name as $key => $value) {
-                        if($key!=0){
-                            echo ", ";
+                    if(!empty($product->category_id)){
+                        $category_name = Category::find_by_ID2($product->category_id);
+                        $id_name=explode(',', $product->category_id);
+                        foreach ($id_name as $key => $value) {
+                            if($key!=0){
+                                echo ", ";
+                            }
+
+                            echo empty($id_name)?'Põhikategooria':$category_name[$key]->$categoryLang;
                         }
-                        echo empty($id_name)?'Põhikategooria':$category_name[$key]->name;
+                    }else{
+                        echo "Põhikategooria";
                     }
-                    
+
                 ?>
             </td> 
             <td> 

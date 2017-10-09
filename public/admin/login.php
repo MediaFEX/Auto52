@@ -76,14 +76,14 @@ if (isset($btn) && $btn == 'register') {
 
     if(empty($errors)) { //kui tingimused vastavad, siis loome kasutaja 
 
-        $user = new User(); 
-        $user->username = $username; 
-        $passCrypt = better_crypt($pass); 
-        $user->password = $passCrypt; 
-        $user->lang = 'et'; 
-        $user->rights = 'user'; 
-        $user->added = date("Y-m-d H:i:s"); 
-        $user->status = 1; 
+        $user = new User();
+        $user->username = $username;
+        $passCrypt = better_crypt($pass);
+        $user->password = $passCrypt;
+        $user->lang = 'en';
+        $user->rights = 'user';
+        $user->added = date("Y-m-d H:i:s");
+        $user->status = 1;
 
         if($user->save()) { 
 
