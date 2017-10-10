@@ -85,12 +85,13 @@ function invalidAccess($ID, $session, $array, $class, $redirect, $table){//Give 
     $category='empty';
     if(!empty($ID)){//Checks if ID is empty if you want to make a new account
         $category = $class::find_by_ID($ID);//Gets data from ID
-    }
-    foreach ($array as $key => $value){
-        if($_SESSION['rights']==$value||$_SESSION['user_id']==$category->$table){//Checks if they can even access this
-            return $category;//Gives valuable information
+        foreach ($array as $key => $value){
+            if($_SESSION['rights']==$value||$_SESSION['user_id']==$category->$table){//Checks if they can even access this
+                return $category;//Gives valuable information
+            }
         }
     }
+
     $session->message('<div class="alert alert-danger">Kategooria puudub</div>');//If they don't have access throw them out.
     reDirectTo(ADMIN_URL . '?page='.$redirect);
 }

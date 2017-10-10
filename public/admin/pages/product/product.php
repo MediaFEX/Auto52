@@ -13,7 +13,12 @@ if(!defined('MAIN_PATH')) {
 // id
 $ID = filter_input(INPUT_GET, 'ID', FILTER_VALIDATE_INT);
 
-$product=invalidAccess($ID, $session, array('admin', 'moderator'), 'product', 'products', 'added_by');
+if(!empty($ID)){
+    $product=invalidAccess($ID, $session, array('admin', 'moderator'), 'product', 'products', 'added_by');
+}else{
+
+}
+
 
 // if(!empty($ID)) {//If not empty, find by ID
 //     $product = Product::find_by_ID($ID);
@@ -157,14 +162,22 @@ if(isset($btn)) { //if button is pressed
 
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#et" aria-controls="et" role="tab" data-toggle="tab"><?php echo translate('flag', 'et'); ?></a></li>
+    <li role="presentation" class="active"><a href="#et" aria-controls="et" role="tab" data-toggle="tab"><?php echo translate('flag', 'en'); ?></a></li>
     <?php if(!empty($languagesInPage)) : foreach ($languagesInPage as $item) : ?>
-        <li role="presentation"><a href="#<?php echo $item; ?>" aria-controls="<?php echo $item; ?>" role="tab" data-toggle="tab">ENG flag<?php //echo translate('flag', $item); ?></a></li>
+        <li role="presentation"><a href="#<?php echo $item; ?>" aria-controls="<?php echo $item; ?>" role="tab" data-toggle="tab"><?php echo translate('flag', $item); ?></a></li>
     <?php endforeach; endif; ?>
 </ul>
 
 <form method="post">
 
+    <?php 
+    if(!isset($product)) {
+        $product_id = 0;
+    } else {
+        $product_id = $product->ID;
+        $translations=translationGiver($product);
+    }
+    ?>
     <!-- Tab panes -->
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="et">
@@ -179,14 +192,15 @@ if(isset($btn)) { //if button is pressed
         </div>
         <?php
 
-        if(isset($product)) {
-            $product_id = 0;
-        } else {
-            $product_id = $product->ID;
-        }
+
         if(!empty($languagesInPage)) : foreach ($languagesInPage as $item) :
 
-            $translations=translationGiver($product); ?>
+            
+            //pd($translations);
+
+
+
+            ?>
 
             <div role="tabpanel" class="tab-pane" id="<?php echo $item; ?>">
                 <div class="form-group">

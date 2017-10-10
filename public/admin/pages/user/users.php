@@ -19,18 +19,21 @@ $category=invalidAccess($ID, $session, array('admin'), 'User', 'user', 'ID');
 $btn = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING);
 $email = filter_input(INPUT_POST, 'name', FILTER_VALIDATE_EMAIL);
 $pass = filter_input(INPUT_POST, 'pass', FILTER_SANITIZE_STRING);
+$lang = filter_input(INPUT_POST, 'lang', FILTER_SANITIZE_STRING);
 
 if($_SESSION['rights']=='admin'){
     $status = filter_input(INPUT_POST, 'status', FILTER_VALIDATE_INT);
     $rights = filter_input(INPUT_POST, 'rights', FILTER_SANITIZE_STRING);
-    $lang = filter_input(INPUT_POST, 'lang', FILTER_SANITIZE_STRING);
+    
 }else{
     $status=$category->status;
     $rights=$category->rights;
-    $lang=$category->lang;
 }
 
 if(isset($btn)) {
+    if(isset($lang)){
+        echo 'suppa lang';
+    }
     $errors = [];
 
     if(empty($email)) {
@@ -57,6 +60,7 @@ if(isset($btn)) {
         }
         $category->status = $status;
         $category->rights = $rights;
+        $session->message('<div class="alert alert-warning">'.$lang.'</div>');
         $category->lang = $lang;
 
         if($category->save()) {
@@ -68,7 +72,7 @@ if(isset($btn)) {
             reDirectTo(ADMIN_URL . '?page=user');
         }
 
-        $session->message('<div class="alert alert-warning">Kategooriat ei lisatud baasi</div>');
+        //$session->message('<div class="alert alert-warning">Kategooriat ei lisatud baasi</div>');
         reDirectTo(ADMIN_URL . '?page=user');
 
     }
