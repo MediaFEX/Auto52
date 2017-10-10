@@ -46,7 +46,7 @@ class ProductLanguage extends DatabaseQuery
     } 
 
     public static function findByProductId($ID, $l) { 
-        global $database; 
+        global $database;
 
         $query = "SELECT * FROM " . PX . self::$table_name 
             . " WHERE product_id=". $database->escape_value($ID) 
