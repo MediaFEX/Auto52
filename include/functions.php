@@ -96,6 +96,16 @@ function invalidAccess($ID, $session, $array, $class, $redirect, $table){//Give 
 }
 
 
+function translationGiver($product){
+    $translates = ProductLanguage::findByProductId($product->ID, LANG);//Gets all current products name and descritption among other things with the given language
+    if(!empty($translates)) {
+        $translations = (object) array_column($translates, 'column_value', 'table_column');//Filters out the most important things: Name and description
+    } else { 
+        $translations = null;//No translations to give, so surround it with [ ]
+    }
+    return $translations;
+}
+
 //Generates the hash used for password encryption
 function generateHash($length) { 
     $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"; 

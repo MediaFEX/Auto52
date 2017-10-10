@@ -23,13 +23,8 @@ if(!empty($ID)) {
 } 
 
 $pictures = Picture::getPicturesByProduct($product->ID); 
-$translates = ProductLanguage::findByProductId($product->ID, LANG);//Gets all current products name and descritption among other things with the given language
 
-if(!empty($translates)) { 
-    $translations = (object) array_column($translates, 'column_value', 'table_column');//Filters out the most important things: Name and description
-} else { 
-    $translations = null; 
-} 
+$translations=translationGiver($product);
 
 ?> 
 <h3 class="page-header text-right"><?php echo $pages[$page]['name'] ?></h3> 

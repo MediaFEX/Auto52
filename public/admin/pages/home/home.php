@@ -100,7 +100,8 @@ $categorys = createCategoryArray($categorys); //Creates array for Category
                     <?php endif; ?>
 
                     <div class="caption">
-                        <h3><?php echo $product->name; //Display product name?></h3>
+                    <?php $translations=translationGiver($product); ?>
+                        <h3><?php echo ProductLanguage::translate('name', $products, $translations)//Display product name?></h3>
                         <div class="row">
                             <div class="col-xs-6"><?php echo $product->showPrice(); //Put an euro symbol at the end?></div>
                             <div class="col-xs-6"> 
