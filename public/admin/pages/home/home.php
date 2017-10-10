@@ -89,7 +89,7 @@ $categorys = createCategoryArray($categorys); //Creates array for Category
 
 <div class="row"> 
     <div id="grid" > 
-        <?php if(!empty($products)) : foreach ($products as $product) : //If products aren't empty?> 
+        <?php if(!empty($products)) : foreach ($products as $product) : //If products aren't empty?>
             <div> 
                 <div class="thumbnail"> 
                     <?php if (empty($product->main_picture)) : //If product doesn't have a thumbnail?> 
@@ -101,7 +101,7 @@ $categorys = createCategoryArray($categorys); //Creates array for Category
 
                     <div class="caption">
                     <?php $translations=translationGiver($product); ?>
-                        <h3><?php echo ProductLanguage::translate('name', $products, $translations)//Display product name?></h3>
+                        <h3><?php echo ProductLanguage::translate('name', $product, $translations)//Display product name?></h3>
                         <div class="row">
                             <div class="col-xs-6"><?php echo $product->showPrice(); //Put an euro symbol at the end?></div>
                             <div class="col-xs-6"> 

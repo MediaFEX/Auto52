@@ -63,7 +63,7 @@ $t = [
     'just_category' => 'Category',
     'products_missing' => 'Products are missing',
     'main_images' => 'Main images',
-    'flag' => 'Eng flag',
+    'flag' => 'ENG flag',
     
 
 

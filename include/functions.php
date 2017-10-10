@@ -95,7 +95,7 @@ function invalidAccess($ID, $session, $array, $class, $redirect, $table){//Give 
     reDirectTo(ADMIN_URL . '?page='.$redirect);
 }
 
-
+//Gives them the translation. because it was on 3 different pages.
 function translationGiver($product){
     $translates = ProductLanguage::findByProductId($product->ID, LANG);//Gets all current products name and descritption among other things with the given language
     if(!empty($translates)) {
@@ -147,17 +147,16 @@ function deleteFolder($str = ""){
 } 
 
 function translate($translate, $l = null) { 
-    global $t; 
+    global $t;
 
     if(!empty($l)) { 
 
-        if(file_exists(INCLUDE_PATH . "languages" . DS . $l . '.php')) { 
+        if(file_exists(INCLUDE_PATH . "languages" . DS . $l . '.php')) {
             require_once INCLUDE_PATH . "languages" . DS . $l . '.php'; 
             return isset($t[$translate]) ? $t[$translate] : "[" . $translate . "]"; 
         } 
 
-    } 
-
+    }
     return isset($t[$translate]) ? $t[$translate] : "[" . $translate . "]";
 
 }
