@@ -50,7 +50,7 @@ if(isset($btn)) { //if button is pressed
     $errors = [];//Declare array
     //Get information
     $names = filterArray($_POST['name'], FILTER_SANITIZE_STRING);
-    $price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_INT); 
+    $price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT); 
     $descriptions = filterArray($_POST['description'], FILTER_SANITIZE_STRING);
     $parent = filterArray($_POST['parent'], FILTER_SANITIZE_STRING);
 
@@ -59,7 +59,6 @@ if(isset($btn)) { //if button is pressed
     } elseif (strlen($names['et']) > 100||strlen($names['en'])>100) {
         $errors['name'] = "Nimi ei tohi olla pikem kui 100 ühikut";
     }
-
     if(empty($price)) {
         $errors['price'] = "Hind ei tohi tühi olla";
     }
@@ -160,7 +159,7 @@ if(isset($btn)) { //if button is pressed
 <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#et" aria-controls="et" role="tab" data-toggle="tab"><?php echo translate('flag', 'et'); ?></a></li>
     <?php if(!empty($languagesInPage)) : foreach ($languagesInPage as $item) : ?>
-        <li role="presentation"><a href="#<?php echo $item; ?>" aria-controls="<?php echo $item; ?>" role="tab" data-toggle="tab"><?php echo translate('flag', $item); ?></a></li>
+        <li role="presentation"><a href="#<?php echo $item; ?>" aria-controls="<?php echo $item; ?>" role="tab" data-toggle="tab">ENG flag<?php //echo translate('flag', $item); ?></a></li>
     <?php endforeach; endif; ?>
 </ul>
 
@@ -187,12 +186,7 @@ if(isset($btn)) { //if button is pressed
         }
         if(!empty($languagesInPage)) : foreach ($languagesInPage as $item) :
 
-            $translates = ProductLanguage::findByProductId($product_id, $item);
-            if(!empty($translates)) {
-                $translations = (object) array_column($translates, 'column_value', 'table_column');
-            } else {
-                $translations = null;
-            } ?>
+            $translations=translationGiver($product); ?>
 
             <div role="tabpanel" class="tab-pane" id="<?php echo $item; ?>">
                 <div class="form-group">
