@@ -15,8 +15,6 @@ $ID = filter_input(INPUT_GET, 'ID', FILTER_VALIDATE_INT);
 
 if(!empty($ID)){
     $product=invalidAccess($ID, $session, array('admin', 'moderator'), 'product', 'products', 'added_by');
-}else{
-
 }
 
 
@@ -162,7 +160,7 @@ if(isset($btn)) { //if button is pressed
 
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#et" aria-controls="et" role="tab" data-toggle="tab"><?php echo translate('flag', 'en'); ?></a></li>
+    <li role="presentation" class="active"><a href="#<?php echo DEFAULT_LANG ?>" aria-controls="<?php echo DEFAULT_LANG ?>" role="tab" data-toggle="tab"><?php echo translate('flag', DEFAULT_LANG); ?></a></li>
     <?php if(!empty($languagesInPage)) : foreach ($languagesInPage as $item) : ?>
         <li role="presentation"><a href="#<?php echo $item; ?>" aria-controls="<?php echo $item; ?>" role="tab" data-toggle="tab"><?php echo translate('flag', $item); ?></a></li>
     <?php endforeach; endif; ?>
@@ -176,14 +174,15 @@ if(isset($btn)) { //if button is pressed
     } else {
         $product_id = $product->ID;
         $translations=translationGiver($product);
+        //pd($translations);
     }
     ?>
     <!-- Tab panes -->
     <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="et">
+        <div role="tabpanel" class="tab-pane active" id="<?php echo DEFAULT_LANG; ?>">
             <div class="form-group">
                 <label for="name"><?php echo translate('product_name'); ?></label>
-                <input value="<?php echo isset($product->name) ? $product->name : ''; ?>" name="name[et]" type="text" class="form-control" id="name" placeholder="Lisage nimi">
+                <input value="<?php echo isset($product->name) ? $product->name : ''; ?>" name="name[<?php echo DEFAULT_LANG; ?>]" type="text" class="form-control" id="name" placeholder="Lisage nimi">
             </div>
             <div class="form-group">
                 <label for="description"><?php echo translate('product_description'); ?></label>
@@ -196,12 +195,8 @@ if(isset($btn)) { //if button is pressed
         if(!empty($languagesInPage)) : foreach ($languagesInPage as $item) :
 
             
-            //pd($translations);
-
-
 
             ?>
-
             <div role="tabpanel" class="tab-pane" id="<?php echo $item; ?>">
                 <div class="form-group">
                     <label for="name"><?php echo translate('product_name', $item); ?></label>

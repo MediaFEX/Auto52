@@ -13,9 +13,9 @@ if(!defined('MAIN_PATH')) {
 $ID = filter_input(INPUT_GET, 'ID', FILTER_VALIDATE_INT);
 
 
-
-$category=invalidAccess($ID, $session, array('admin'), 'User', 'user', 'ID');
-
+if(!empty($ID)||$_SESSION['rights']!='admin'){
+    $category=invalidAccess($ID, $session, array('admin'), 'User', 'user', 'ID');
+}
 $btn = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING);
 $email = filter_input(INPUT_POST, 'name', FILTER_VALIDATE_EMAIL);
 $pass = filter_input(INPUT_POST, 'pass', FILTER_SANITIZE_STRING);
@@ -30,10 +30,7 @@ if($_SESSION['rights']=='admin'){
     $rights=$category->rights;
 }
 
-if(isset($btn)) {
-    if(isset($lang)){
-        echo 'suppa lang';
-    }
+if(isset($btn)) {   
     $errors = [];
 
     if(empty($email)) {
