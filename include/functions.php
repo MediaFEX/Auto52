@@ -153,7 +153,9 @@ function translate($translate, $l = null) {
     if(!empty($l)) { 
 
         if(file_exists(INCLUDE_PATH . "languages" . DS . $l . '.php')) {
+            //pd($t[$translate]);
             require_once INCLUDE_PATH . "languages" . DS . $l . '.php'; 
+            //pd($t[$translate]);
             return isset($t[$translate]) ? $t[$translate] : "[" . $translate . "]"; 
         } 
 

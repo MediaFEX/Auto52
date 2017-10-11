@@ -32,7 +32,7 @@ defined('MAIN_PATH') ? null : define('MAIN_PATH', ROOT_PATH . 'public' . DS);
 defined('MAIN_PAGES_PATH') ? null : define('MAIN_PAGES_PATH', MAIN_PATH . 'pages' . DS); 
 
 //kaks võimalust 
-defined('ADMIN_URL') ? null : define('ADMIN_URL', ROOT_URL . 'public/admin/'); 
+defined('ADMIN_URL') ? null : define('ADMIN_URL', ROOT_URL . 'public/admin/');
 defined('ADMIN_PATH') ? null : define('ADMIN_PATH', ROOT_PATH . 'public' . DS . 'admin' . DS); 
 defined('ADMIN_PAGES_URL') ? null : define('ADMIN_PAGES_URL', ROOT_URL . 'public/admin/pages/'); 
 defined('ADMIN_PAGES_PATH') ? null : define('ADMIN_PAGES_PATH', ROOT_PATH . 'public' . DS . 'admin' . DS . 'pages' . DS); 
@@ -81,7 +81,7 @@ if(file_exists($langFile)) {
     require_once INCLUDE_PATH . "languages" . DS . DEFAULT_LANG . '.php';
 }
 
-$languagesInPage = ['en'];
+$languagesInPage = ['et'];
 if(LANG=='et'){
     $categoryLang='et_name';
 }else{

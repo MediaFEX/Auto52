@@ -15,6 +15,7 @@ $(".delete-confirm").click(function () {
     var confirm_text = "Your imaginary file has been deleted.";
 
     var ID = $(this).data("delete-id");
+    var rights= $(this).data("rights");
     var url = $(this).data("url");
 
     var closestTr = $(this).closest("tr");
@@ -31,15 +32,17 @@ $(".delete-confirm").click(function () {
     function(){
         $.ajax({
             method: "POST",
-            url: admin_url + url + ".php?ID=" + ID
+            url: admin_url + url + ".php?ID=" + ID + "&?rights=" + rights
         }) 
         .done(function( data ) { 
             if(data == '') { 
                 closestTr.remove(); 
                 swal(heading_1, confirm_text, "success"); 
-            } else { 
+            } else if(rights!='admin') { 
+                url: admin_url + "logout.php?delete=1";
+            } else{
                 swal("ERROR", data, "error"); 
-            } 
+            }
 
         });
     });
